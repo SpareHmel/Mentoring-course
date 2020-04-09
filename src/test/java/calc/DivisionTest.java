@@ -1,20 +1,20 @@
 package calc;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
 
-public class DivisionTest extends Base {
+import com.epam.tat.module4.Calculator;
+import org.junit.Test;
 
-    @DataProvider
-    public static Object[][] calcData() {
-        return new Object[][] {{-5, -5, 1}, {42, -7, -6}, {100, 10, 10}};
-    }
+public class DivisionTest {
 
-    @Test(dataProvider = "calcData")
-    public void divisionTest(long dividend, long divisor, long expected) {
-        long actual = calculator.div(dividend, divisor);
-        assertEquals(actual, expected);
+    //junit demo
+    Calculator calculator;
+
+    @Test()
+    public void divisionTest() {
+        calculator = new Calculator();
+        long actual = calculator.div(22, 2);
+        assertEquals(actual, 11);
+        calculator = null;
     }
 }
