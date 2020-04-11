@@ -3,11 +3,10 @@
 
     <test name="suite">
         <classes>
-            <class name="calculator.arithmetic.DivTest"/>
+            <class name="calculator.positive_or_negative.IsNegativeTest"/>
             <class name="calculator.arithmetic.MultTest"/>
             <class name="calculator.arithmetic.SubTest"/>
             <class name="calculator.arithmetic.SumTest"/>
         </classes>
     </test>
-
 </suite>
