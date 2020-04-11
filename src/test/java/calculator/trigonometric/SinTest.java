@@ -11,6 +11,6 @@ public class SinTest extends CalcBase {
   public void sinTest() {
     double actual = calculator.sin(0);
     double expected = Math.sin(0);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected, "invalid result of sin operation");
   }
 }

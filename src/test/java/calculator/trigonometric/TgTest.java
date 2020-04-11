@@ -11,6 +11,6 @@ public class TgTest extends CalcBase {
   public void tgTest() {
     double actual = calculator.tg(15);
     double expected = Math.tan(15);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected, "invalid result of tg operation");
   }
 }

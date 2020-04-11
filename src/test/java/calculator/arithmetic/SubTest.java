@@ -17,6 +17,6 @@ public class SubTest extends CalcBase {
     public void subtractionTest(long minuend, long subtrahend) {
         long actual = calculator.sub(minuend, subtrahend);
         long expected = minuend - subtrahend;
-        assertEquals(actual, expected);
+        assertEquals(actual, expected, "invalid result of sub operation");
     }
 }

@@ -11,6 +11,6 @@ public class CosTest extends CalcBase {
   public void cosTest() {
     double actual = calculator.cos(0);
     double expected = Math.cos(0);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected, "invalid result of cos operation");
   }
 }

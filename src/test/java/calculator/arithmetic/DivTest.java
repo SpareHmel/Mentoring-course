@@ -14,6 +14,6 @@ public class DivTest {
         Calculator calculator = new Calculator();
         long actual = calculator.div(22, 2);
         long expected = 22 / 2;
-        assertEquals(actual, expected);
+        assertEquals(actual, expected, "invalid result of div operation");
     }
 }

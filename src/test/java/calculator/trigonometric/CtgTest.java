@@ -11,6 +11,6 @@ public class CtgTest extends CalcBase {
   public void ctgTest() {
     double actual = calculator.ctg(8);
     double expected = 1/Math.tan(8);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected, "invalid result of ctg operation");
   }
 }

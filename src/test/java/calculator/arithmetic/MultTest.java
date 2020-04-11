@@ -16,6 +16,6 @@ public class MultTest extends CalcBase {
     public void multiplicationTest(long multiplicand, long factor) {
         long actual = calculator.mult(multiplicand, factor);
         long expected = multiplicand*factor;
-        assertEquals(actual, expected);
+        assertEquals(actual, expected, "invalid result of mult operation");
     }
 }

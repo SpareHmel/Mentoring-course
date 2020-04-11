@@ -18,6 +18,6 @@ public class IsNegativeTest extends CalcBase {
   public void isNegativeTest(long number) {
     boolean actual = calculator.isNegative(number);
     boolean expected = Stream.of(number).anyMatch(n -> n < 0L);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected, "invalid result of isNegative operation");
   }
 }

@@ -17,6 +17,6 @@ public class SumTest extends CalcBase {
     public void sumTest(long summand1, long summand2) {
         long actual = calculator.sum(summand1, summand2);
         long expected = summand1 + summand2;
-        assertEquals(actual, expected);
+        assertEquals(actual, expected, "invalid result of sum operation");
     }
 }

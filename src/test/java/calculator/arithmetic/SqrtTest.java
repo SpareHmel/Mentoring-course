@@ -11,6 +11,6 @@ public class SqrtTest extends CalcBase {
   public void sqrtTest() {
     double actual = calculator.sqrt(13.5);
     double expected = Math.sqrt(13.8);
-    assertEquals(actual, expected);
+    assertEquals(actual, expected,"invalid result of sqrt operation");
   }
 }
