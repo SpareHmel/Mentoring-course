@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="testNGGroupTests">
+
+  <test name="Group 1">
+    <groups>
+      <run>
+        <include name="trigonometric"/>
+      </run>
+    </groups>
+
+    <classes>
+      <class name="calculator.trigonometric.CosTest"/>
+      <class name="calculator.trigonometric.SinTest"/>
+      <class name="calculator.trigonometric.CtgTest"/>
+      <class name="calculator.trigonometric.TgTest"/>
+    </classes>
+  </test>
+
+</suite>

@@ -8,7 +8,7 @@ public class CalcTestNGBase {
 
     protected Calculator calculator;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         calculator = new Calculator();
     }

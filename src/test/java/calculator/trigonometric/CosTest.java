@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class CosTest extends CalcTestNGBase {
 
-  @Test
+  @Test(groups = {"trigonometric"})
   public void cosTest() {
     double actual = calculator.cos(0);
     double expected = Math.cos(0);

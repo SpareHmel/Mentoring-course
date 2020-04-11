@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class SinTest extends CalcTestNGBase {
 
-  @Test
+  @Test(groups = "trigonometric")
   public void sinTest() {
     double actual = calculator.sin(0);
     double expected = Math.sin(0);

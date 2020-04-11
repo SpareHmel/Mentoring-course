@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class TgTest extends CalcTestNGBase {
 
-  @Test
+  @Test(groups = "trigonometric")
   public void tgTest() {
     double actual = calculator.tg(15);
     double expected = Math.tan(15);
