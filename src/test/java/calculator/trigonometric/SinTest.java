@@ -2,10 +2,10 @@ package calculator.trigonometric;
 
 import static org.testng.Assert.assertEquals;
 
-import calculator.base.CalcBase;
+import calculator.base.CalcTestNGBase;
 import org.testng.annotations.Test;
 
-public class SinTest extends CalcBase {
+public class SinTest extends CalcTestNGBase {
 
   @Test
   public void sinTest() {

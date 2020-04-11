@@ -2,10 +2,10 @@ package calculator.trigonometric;
 
 import static org.testng.Assert.assertEquals;
 
-import calculator.base.CalcBase;
+import calculator.base.CalcTestNGBase;
 import org.testng.annotations.Test;
 
-public class TgTest extends CalcBase {
+public class TgTest extends CalcTestNGBase {
 
   @Test
   public void tgTest() {

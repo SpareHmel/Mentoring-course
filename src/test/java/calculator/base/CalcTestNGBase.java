@@ -4,7 +4,7 @@ import com.epam.tat.module4.Calculator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class CalcBase {
+public class CalcTestNGBase {
 
     protected Calculator calculator;
 

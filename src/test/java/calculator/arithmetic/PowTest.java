@@ -2,10 +2,10 @@ package calculator.arithmetic;
 
 import static org.testng.Assert.assertEquals;
 
-import calculator.base.CalcBase;
+import calculator.base.CalcTestNGBase;
 import org.testng.annotations.Test;
 
-public class PowTest extends CalcBase {
+public class PowTest extends CalcTestNGBase {
 
   @Test
   public void powTest() {

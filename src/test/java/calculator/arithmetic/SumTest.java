@@ -1,16 +1,16 @@
 package calculator.arithmetic;
 
-import calculator.base.CalcBase;
+import static org.testng.Assert.assertEquals;
+
+import calculator.base.CalcTestNGBase;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
-public class SumTest extends CalcBase {
+public class SumTest extends CalcTestNGBase {
 
     @DataProvider
     public static Object[][] calcData() {
-        return new Object[][] {{10, -22}, {55, 5}, {-6, -7}};
+        return new Object[][]{{10, -22}, {55, 5}, {-6, -7}};
     }
 
     @Test(dataProvider = "calcData")
