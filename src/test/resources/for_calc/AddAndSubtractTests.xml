@@ -3,8 +3,8 @@
 
     <test name="add and subtract suite">
         <classes>
-            <class name="calc.SubtractionTest"/>
-            <class name="calc.SumTest"/>
+            <class name="calculator.arithmetic.SubTest"/>
+            <class name="calculator.arithmetic.SumTest"/>
         </classes>
     </test>
 

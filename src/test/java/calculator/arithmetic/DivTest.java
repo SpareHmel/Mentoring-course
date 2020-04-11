@@ -1,20 +1,19 @@
-package calc;
+package calculator.arithmetic;
 
 import static org.testng.Assert.assertEquals;
 
 import com.epam.tat.module4.Calculator;
 import org.junit.Test;
 
-public class DivisionTest {
+public class DivTest {
 
     //junit demo
-    Calculator calculator;
 
-    @Test()
+    @Test
     public void divisionTest() {
-        calculator = new Calculator();
+        Calculator calculator = new Calculator();
         long actual = calculator.div(22, 2);
-        assertEquals(actual, 11);
-        calculator = null;
+        long expected = 22 / 2;
+        assertEquals(actual, expected);
     }
 }

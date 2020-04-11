@@ -4,64 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>toDelete2</artifactId>
+    <groupId>com.epam</groupId>
+    <artifactId>calculator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <java.version>1.8</java.version>
-        <testng.version>LATEST</testng.version>
-        <junit.version>LATEST</junit.version>
+        <testng.version>7.1.0</testng.version>
+        <junit.version>4.13</junit.version>
+        <calculator.version>1.0</calculator.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <hw1.path>${basedir}/src/test/resources/files/calculator-1.0.jar</hw1.path>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>calc-tests</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml>src/test/resources/forhw1/hw1tests.xml</suite.xml>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>calc-add-and-subtract-tests</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml>src/test/resources/forhw1/hw1AddAndSubtractTests.xml</suite.xml>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>calc-mult-and-div-tests</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml>src/test/resources/forhw1/hw1MultAndDivTests.xml</suite.xml>
-            </properties>
-        </profile>
-    </profiles>
-
     <dependencies>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>2.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-        </dependency>
-
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -71,45 +27,50 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
         </dependency>
 
         <dependency>
             <groupId>hw1</groupId>
             <artifactId>calculator</artifactId>
-            <version>1.0</version>
+            <version>${calculator.version}</version>
             <scope>system</scope>
-            <systemPath>${hw1.path}</systemPath>
+            <systemPath>${basedir}/src/test/resources/files/calculator-1.0.jar</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>3.6.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-            <version>5.2.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>calculator-parallel-tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/for_calc/TestsParallel.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>calculator-add-and-subtract-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/for_calc/AddAndSubtractTests.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>calculator-mult-and-div-tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/for_calc/MultAndDivTests.xml</suite.xml>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -127,7 +88,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suite.xml}</suiteXmlFile>

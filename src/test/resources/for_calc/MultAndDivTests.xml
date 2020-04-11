@@ -3,8 +3,8 @@
 
     <test name="multiple and divide suite">
         <classes>
-            <class name="calc.DivisionTest"/>
-            <class name="calc.MultiplicationTest"/>
+            <class name="calculator.arithmetic.DivTest"/>
+            <class name="calculator.arithmetic.MultTest"/>
         </classes>
     </test>
 

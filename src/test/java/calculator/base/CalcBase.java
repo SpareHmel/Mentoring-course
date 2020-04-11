@@ -1,12 +1,12 @@
-package calc;
+package calculator.base;
 
 import com.epam.tat.module4.Calculator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class Base {
+public class CalcBase {
 
-    Calculator calculator;
+    protected Calculator calculator;
 
     @BeforeMethod
     public void before() {
