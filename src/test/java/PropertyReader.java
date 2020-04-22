@@ -4,10 +4,16 @@ import java.util.Properties;
 
 public class PropertyReader {
 
-  private static final Properties property = new Properties();
+  private final Properties property = new Properties();
 
-  public static String readPropertyFile(String propertyName) {
-    try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
+  private final String propertyFileName;
+
+  PropertyReader(String propertyFileName) {
+    this.propertyFileName = propertyFileName;
+  }
+
+  public String readPropertyFile(String propertyName) {
+    try (FileInputStream fis = new FileInputStream(propertyFileName)) {
       property.load(fis);
     } catch (IOException e) {
       e.printStackTrace();

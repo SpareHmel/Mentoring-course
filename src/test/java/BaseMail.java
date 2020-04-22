@@ -14,6 +14,8 @@ public class BaseMail {
 
   protected WebDriver driver;
 
+  PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
+
   @BeforeSuite
   protected void setupDriverPath() {
     System.setProperty("webdriver.chrome.driver",
@@ -23,10 +25,10 @@ public class BaseMail {
   @BeforeMethod
   protected void setUp() {
     driver = new ChromeDriver();
-    driver.manage().timeouts().implicitlyWait(Integer.parseInt(PropertyReader
+    driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
-    driver.get(PropertyReader.readPropertyFile("mailLink"));
+    driver.get(propertyReader.readPropertyFile("mailLink"));
     signIn();
   }
 
@@ -36,9 +38,9 @@ public class BaseMail {
   }
 
   protected void signIn() {
-    driver.findElement(By.id("mailbox:login")).sendKeys(PropertyReader.readPropertyFile("login"));
+    driver.findElement(By.id("mailbox:login")).sendKeys(propertyReader.readPropertyFile("login"));
     driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
-    waitForClickable(By.id("mailbox:password")).sendKeys(PropertyReader.readPropertyFile("password"));
+    waitForClickable(By.id("mailbox:password")).sendKeys(propertyReader.readPropertyFile("password"));
     driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
   }
 
