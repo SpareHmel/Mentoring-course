@@ -23,9 +23,10 @@ public class BaseMail {
   @BeforeMethod
   protected void setUp() {
     driver = new ChromeDriver();
-    driver.manage().timeouts().implicitlyWait(PropertyReader.getImplicitlyWaitDefault(), TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(Integer.parseInt(PropertyReader
+        .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
-    driver.get(PropertyReader.getMailLink());
+    driver.get(PropertyReader.readPropertyFile("mailLink"));
     signIn();
   }
 
@@ -35,9 +36,9 @@ public class BaseMail {
   }
 
   protected void signIn() {
-    driver.findElement(By.id("mailbox:login")).sendKeys(PropertyReader.getLogin());
+    driver.findElement(By.id("mailbox:login")).sendKeys(PropertyReader.readPropertyFile("login"));
     driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
-    waitForClickable(By.id("mailbox:password")).sendKeys(PropertyReader.getPassword());
+    waitForClickable(By.id("mailbox:password")).sendKeys(PropertyReader.readPropertyFile("password"));
     driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
   }
 
