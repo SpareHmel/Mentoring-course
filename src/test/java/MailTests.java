@@ -35,7 +35,7 @@ public class MailTests extends BaseMail {
     //Verify, that the mail disappeared from ‘Drafts’ folder.
     waitForPresence(By.cssSelector("a[href='/drafts/'] .nav__folder-name__txt")).click();
     assertEquals(waitForPresence(By.cssSelector(".letter-list .octopus__title")).getText(),
-        "У вас нет незаконченных" + "\n" + "или неотправленных писем");
+        "У вас нет незаконченных\nили неотправленных писем");
     //Log off.
     driver.findElement(By.id("PH_logoutLink")).click();
   }
