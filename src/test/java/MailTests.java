@@ -17,11 +17,11 @@ public class MailTests extends BaseMail {
     //Create a new mail (fill addressee, subject and body fields).
     waitForClickable(By.className("compose-button__txt")).click();
     waitForPresence(By.cssSelector("div[data-name='to'] input")).sendKeys(addressee);
-    driver.findElement(By.cssSelector(".container--3QXHv input")).sendKeys(subject);
+    driver.findElement(By.cssSelector("div[class*=subject__container] input")).sendKeys(subject);
     driver.findElement(By.xpath("//div[@role='textbox']")).sendKeys(body);
     //Save the mail as a draft.
     driver.findElement(By.xpath("//*[@data-title-shortcut='Ctrl+S']/span")).click();
-    driver.findElement(By.cssSelector("button[title='Закрыть']")).click();
+    driver.findElement(By.cssSelector(".compose-windows button[tabindex='700']")).click();
     waitForPresence(By.cssSelector("a[href='/drafts/'] .nav__folder-name__txt")).click();
     //Verify the draft content (addressee, subject and body – should be the same as in 3).
     assertTrue(waitForPresence(By.xpath("//div[@class='dataset__items']//span[@title='hmel25@bk.ru']")).isDisplayed());
@@ -31,7 +31,7 @@ public class MailTests extends BaseMail {
     waitForPresence(By.xpath("//div[@role='textbox']")).sendKeys(Keys.CONTROL, Keys.ENTER);
     //Verify, that the mail is in ‘Sent’ folder
     waitForPresence(By.cssSelector(".layer__link")).click();
-    assertEquals(waitForPresence(By.cssSelector(".dataset-letters .ll-sj__normal")).getText(), subject);
+    assertEquals(waitForPresence(By.cssSelector(".thread__subject")).getText(), subject);
     //Verify, that the mail disappeared from ‘Drafts’ folder.
     waitForPresence(By.cssSelector("a[href='/drafts/'] .nav__folder-name__txt")).click();
     assertEquals(waitForPresence(By.cssSelector(".letter-list .octopus__title")).getText(),
