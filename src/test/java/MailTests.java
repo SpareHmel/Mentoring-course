@@ -8,6 +8,34 @@ import org.testng.annotations.Test;
 public class MailTests extends BaseMail {
 
   @Test
+  public void POtest() throws InterruptedException {
+    final String addressee = "hmel25@bk.ru";
+    final String subject = "Elimination details";
+    final String body = "4815162342";
+    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    baseMailPage.startWritingLetter();
+    baseMailPage.fillAddresseeField(addressee);
+    baseMailPage.fillSubjectField(subject);
+    baseMailPage.fillBodyField(body);
+    baseMailPage.saveLetterAsDraft();
+    baseMailPage.closeMessageWindow(); // тут задержка
+    Thread.sleep(2000);
+    //нужет waiter
+    //https://stackoverflow.com/questions/47191185/how-to-explicitly-wait-while-using-page-factory-in-selenium
+    draftsPage.openPage();
+    assertTrue(draftsPage.getDraftsAddressee().isDisplayed());
+    assertEquals(draftsPage.getDraftsSubject().getText(), subject);
+    draftsPage.selectDraftAndSendMail();
+    Thread.sleep(2000);
+    sentPage.openPage();
+    assertTrue(sentPage.getMail().getText().contains(subject));
+    draftsPage.openPage();
+    assertEquals(draftsPage.getNoDraftsMessage(), "У вас нет незаконченных\nили неотправленных писем");
+    baseMailPage.logOff();
+
+  }
+
+  @Test
   public void mailTest() {
     final String addressee = "hmel25@bk.ru";
     final String subject = "Elimination details";

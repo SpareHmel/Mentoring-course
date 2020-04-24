@@ -13,6 +13,7 @@
     <testng.version>7.1.0</testng.version>
     <selenium.version>3.141.59</selenium.version>
     <hamcrest.version>2.1</hamcrest.version>
+    <lombok.version>1.18.8</lombok.version>
     <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
   </properties>
@@ -35,6 +36,13 @@
       <artifactId>hamcrest</artifactId>
       <version>${hamcrest.version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
