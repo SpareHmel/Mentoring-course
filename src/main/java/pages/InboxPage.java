@@ -19,6 +19,4 @@ public class InboxPage extends BaseMailPage {
 
   @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
   private WebElement mail;
-
-//  public void selectMailA
 }

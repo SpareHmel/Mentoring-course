@@ -21,6 +21,7 @@ public class SentPage extends BaseMailPage {
   private WebElement mail;
 
   public WebElement getMail() {
+    alertHandling(mail);
     return mail;
   }
 }

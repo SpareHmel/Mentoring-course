@@ -15,7 +15,7 @@ public class HomePage extends AbstractPage {
   @FindBy(id = "mailbox:login")
   private WebElement loginField;
 
-  @FindBy(css = "mailbox:password")
+  @FindBy(id = "mailbox:password")
   private WebElement passwordField;
 
   @FindBy(css = ".o-control[type='submit']")
@@ -26,13 +26,10 @@ public class HomePage extends AbstractPage {
     return this;
   }
 
-  public void enterLogin(String login) {
+  public void signIn(String login, String password) {
     loginField.sendKeys(login);
     submitButton.click();
-  }
-
-  public void enterPassword(String password) {
-    passwordField.sendKeys(password);
+    waitForPresence(passwordField).sendKeys(password);
     submitButton.click();
   }
 }

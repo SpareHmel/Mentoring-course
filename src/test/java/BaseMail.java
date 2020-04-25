@@ -1,30 +1,29 @@
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.By;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import pages.BaseMailPage;
-import pages.DraftsPage;
-import pages.HomePage;
-import pages.InboxPage;
-import pages.SentPage;
+import pages.*;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class BaseMail {
 
   protected WebDriver driver;
-
   PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   protected BaseMailPage baseMailPage;
   protected HomePage homePage;
   protected DraftsPage draftsPage;
   protected InboxPage inboxPage;
   protected SentPage sentPage;
+  protected String login;
+  protected String password;
 
   @BeforeSuite
   protected void setupDriverPath() {
@@ -34,7 +33,9 @@ public class BaseMail {
 
   @BeforeMethod
   protected void setUp() {
-    driver = new ChromeDriver();
+    ChromeOptions chromeOptions = new ChromeOptions();
+    chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+    driver = new ChromeDriver(chromeOptions);
     driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
@@ -44,7 +45,7 @@ public class BaseMail {
     draftsPage = new DraftsPage(driver);
     inboxPage = new InboxPage(driver);
     sentPage = new SentPage(driver);
-    signIn();
+    setSignInOptions();
   }
 
   @AfterMethod
@@ -52,23 +53,9 @@ public class BaseMail {
     driver.quit();
   }
 
-  protected void signIn() {
-    driver.findElement(By.id("mailbox:login")).sendKeys(propertyReader.readPropertyFile("login"));
-    driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
-    waitForClickable(By.id("mailbox:password")).sendKeys(propertyReader.readPropertyFile("password"));
-    driver.findElement(By.cssSelector(".o-control[type='submit']")).click();
-  }
-
-  protected WebElement waitForPresence(By by) {
-    return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(by));
-  }
-
-/*  protected WebElement waitForPresencePage(AbstractPage page) {
-    return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(by));
-  }*/
-
-  protected WebElement waitForClickable(By by) {
-    return new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(by));
+  private void setSignInOptions() {
+    login = propertyReader.readPropertyFile("login");
+    password = propertyReader.readPropertyFile("password");
   }
 
   protected void isTitlePresentedWithText(String title) {

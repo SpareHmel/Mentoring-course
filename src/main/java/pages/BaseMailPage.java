@@ -55,7 +55,7 @@ public class BaseMailPage extends AbstractPage {
     bodyField.sendKeys(body);
   }
 
-  public void saveLetterAsDraft() {
+  public void saveMailAsDraft() {
     saveAsDraftButton.click();
   }
 

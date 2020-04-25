@@ -1,8 +1,6 @@
 package pages;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -17,7 +15,8 @@ public class DraftsPage extends BaseMailPage {
 
   public DraftsPage openPage() {
     driver.get(DRAFTS_PAGE_URL);
-    wait.until(ExpectedConditions.titleContains("Черновики - Почта Mail.ru"));
+//    waitForLoad();
+//    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[class='ll-sj__normal']")));
     return this;
   }
 
@@ -34,7 +33,8 @@ public class DraftsPage extends BaseMailPage {
   private WebElement noDraftsMessage;
 
   public WebElement getDraftsAddressee() {
-    return waitForPresence(draftsAddressee);
+    alertHandling(draftsAddressee);
+    return draftsAddressee;
   }
 
   public WebElement getDraftsSubject() {
