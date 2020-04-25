@@ -8,6 +8,9 @@ public class SentPage extends BaseMailPage {
 
   private static final String INBOX_PAGE_URL = "https://e.mail.ru/sent/";
 
+  @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
+  private WebElement mail;
+
   public SentPage(WebDriver driver) {
     super(driver);
   }
@@ -17,11 +20,8 @@ public class SentPage extends BaseMailPage {
     return this;
   }
 
-  @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
-  private WebElement mail;
-
-  public WebElement getMail() {
+  public String getMailDetailsText() {
     alertHandling(mail);
-    return mail;
+    return mail.getText();
   }
 }

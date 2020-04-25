@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,15 +7,6 @@ import org.openqa.selenium.support.FindBy;
 public class BaseMailPage extends AbstractPage {
 
   private static final String INBOX_PAGE_URL = "https://e.mail.ru/";
-
-  public BaseMailPage(WebDriver driver) {
-    super(driver);
-  }
-
-  public BaseMailPage openPage() {
-    driver.get(INBOX_PAGE_URL);
-    return this;
-  }
 
   @FindBy(className = "compose-button__txt")
   private WebElement writeLetterButton;
@@ -39,6 +29,15 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(id = "PH_logoutLink")
   private WebElement logOffButton;
 
+  public BaseMailPage(WebDriver driver) {
+    super(driver);
+  }
+
+  public BaseMailPage openPage() {
+    driver.get(INBOX_PAGE_URL);
+    return this;
+  }
+
   public void startWritingLetter() {
     writeLetterButton.click();
   }
@@ -57,10 +56,6 @@ public class BaseMailPage extends AbstractPage {
 
   public void saveMailAsDraft() {
     saveAsDraftButton.click();
-  }
-
-  public void sendLetter() {
-    bodyField.sendKeys(Keys.CONTROL, Keys.ENTER);
   }
 
   public void closeMessageWindow() {

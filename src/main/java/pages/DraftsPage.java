@@ -1,24 +1,13 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class DraftsPage extends BaseMailPage {
 
   private static final String DRAFTS_PAGE_URL = "https://e.mail.ru/drafts/";
-
-  public DraftsPage(WebDriver driver) {
-    super(driver);
-  }
-
-  public DraftsPage openPage() {
-    driver.get(DRAFTS_PAGE_URL);
-//    waitForLoad();
-//    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[class='ll-sj__normal']")));
-    return this;
-  }
 
   @FindBy(xpath = "//div[@class='dataset__items']//span[@title='hmel25@bk.ru']")
   private WebElement draftsAddressee;
@@ -32,13 +21,22 @@ public class DraftsPage extends BaseMailPage {
   @FindBy(css = ".letter-list .octopus__title")
   private WebElement noDraftsMessage;
 
-  public WebElement getDraftsAddressee() {
-    alertHandling(draftsAddressee);
-    return draftsAddressee;
+  public DraftsPage(WebDriver driver) {
+    super(driver);
   }
 
-  public WebElement getDraftsSubject() {
-    return waitForPresence(draftsSubject);
+  public DraftsPage openPage() {
+    driver.get(DRAFTS_PAGE_URL);
+    return this;
+  }
+
+  public Boolean isDraftsAddresseeDisplayed() {
+    alertHandling(draftsAddressee);
+    return draftsAddressee.isDisplayed();
+  }
+
+  public String getDraftsSubjectText() {
+    return waitForPresence(draftsSubject).getText();
   }
 
   public void selectDraftAndSendMail() {
@@ -46,7 +44,7 @@ public class DraftsPage extends BaseMailPage {
     fillBodyField(Keys.CONTROL, Keys.ENTER);
   }
 
-  public String getNoDraftsMessage() {
+  public String getNoDraftsMessageText() {
     return waitForPresence(noDraftsMessage).getText();
   }
 }

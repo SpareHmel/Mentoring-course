@@ -8,22 +8,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import pages.*;
+import pages.BaseMailPage;
+import pages.DraftsPage;
+import pages.HomePage;
+import pages.SentPage;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class BaseMail {
 
-  protected WebDriver driver;
   PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
+  protected WebDriver driver;
+  protected String login;
+  protected String password;
   protected BaseMailPage baseMailPage;
   protected HomePage homePage;
   protected DraftsPage draftsPage;
-  protected InboxPage inboxPage;
   protected SentPage sentPage;
-  protected String login;
-  protected String password;
 
   @BeforeSuite
   protected void setupDriverPath() {
@@ -40,11 +42,6 @@ public class BaseMail {
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
     driver.get(propertyReader.readPropertyFile("mailLink"));
-    baseMailPage = new BaseMailPage(driver);
-    homePage = new HomePage(driver);
-    draftsPage = new DraftsPage(driver);
-    inboxPage = new InboxPage(driver);
-    sentPage = new SentPage(driver);
     setSignInOptions();
   }
 
