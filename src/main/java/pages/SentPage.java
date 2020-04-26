@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class SentPage extends BaseMailPage {
 
-  private static final String INBOX_PAGE_URL = "https://e.mail.ru/sent/";
+  private static final String INBOX_PAGE_URL = BASE_URL + "/sent";
 
   @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
   private WebElement mail;

@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class BaseMailPage extends AbstractPage {
 
-  private static final String INBOX_PAGE_URL = "https://e.mail.ru/";
-
   @FindBy(className = "compose-button__txt")
   private WebElement writeLetterButton;
 
@@ -34,7 +32,7 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public BaseMailPage openPage() {
-    driver.get(INBOX_PAGE_URL);
+    driver.get(BASE_URL);
     return this;
   }
 

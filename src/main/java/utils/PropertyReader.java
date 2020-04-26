@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -8,7 +10,7 @@ public class PropertyReader {
 
   private final String propertyFileName;
 
-  PropertyReader(String propertyFileName) {
+  public PropertyReader(String propertyFileName) {
     this.propertyFileName = propertyFileName;
   }
 

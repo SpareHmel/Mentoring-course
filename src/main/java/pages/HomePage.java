@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
 
-  private static final String HOMEPAGE_URL = "https://e.mail.ru/inbox/";
+  private static final String HOMEPAGE_URL = propertyReader.readPropertyFile("mailLink");
 
   @FindBy(id = "mailbox:login")
   private WebElement loginField;

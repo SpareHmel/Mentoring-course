@@ -4,13 +4,17 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.PropertyReader;
 
 public abstract class AbstractPage {
 
   protected WebDriver driver;
   protected WebDriverWait wait;
+  protected static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
+  protected static final String BASE_URL = propertyReader.readPropertyFile("baseUrl");
 
   public abstract AbstractPage openPage();
+
 
   public AbstractPage(WebDriver driver) {
     this.driver = driver;

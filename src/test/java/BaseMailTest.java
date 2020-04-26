@@ -12,11 +12,12 @@ import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.HomePage;
 import pages.SentPage;
+import utils.PropertyReader;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class BaseMail {
+public class BaseMailTest {
 
   PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   protected WebDriver driver;
