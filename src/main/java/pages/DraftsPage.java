@@ -9,8 +9,6 @@ public class DraftsPage extends BaseMailPage {
 
   private static final String DRAFTS_PAGE_URL = BASE_URL + "/drafts";
 
-//  @FindBy(xpath = "//div[@class='dataset__items']//span[@title='hmel25@bk.ru']")
-//  @FindBy(xpath = "//a[contains(@href, '/drafts/0')]//span[@class='Hi5s283']")
   @FindBy(xpath = "//a[contains(@href, '/drafts/0')]")
   private WebElement draftsAddressee;
 
