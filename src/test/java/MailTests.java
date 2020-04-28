@@ -82,5 +82,6 @@ public class MailTests extends BaseMailTest {
     draftsPage = new DraftsPage(driver);
     draftsPage.openPage();
     draftsPage.deleteDraft();
+    baseMailPage.logOff();
   }
 }
