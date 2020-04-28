@@ -28,10 +28,10 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(id = "PH_logoutLink")
   private WebElement logOffButton;
 
-  @FindBy(xpath = "//div[@class='text--2BGkj']/..")
+  @FindBy(xpath = "(//*[contains(@class, 'editor_container')]//div[contains(@class, 'withBorder')]//button)[last()]")
   private WebElement templateButton;
 
-  @FindBy(css = ".control--2sQCu .ellipsis--2wDr9")
+  @FindBy(xpath = "//div[contains(@class, 'datalist_visible')]//div[contains(@class, 'control')]")
   private WebElement templateSaveButton;
 
   public BaseMailPage(WebDriver driver) {
@@ -68,7 +68,7 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void logOff() {
-    logOffButton.click();
+    waitForPresence(logOffButton).click();
   }
 
   public void saveLetterAsTemplate() {

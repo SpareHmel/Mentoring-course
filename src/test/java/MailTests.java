@@ -4,7 +4,6 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 import pages.BaseMailPage;
 import pages.DraftsPage;
-import pages.HomePage;
 import pages.SentPage;
 import pages.TemplatePage;
 
@@ -16,8 +15,6 @@ public class MailTests extends BaseMailTest {
 
   @Test
   public void createDraftAndSendMail() {
-    homePage = new HomePage(driver);
-    homePage.signIn(login, password);
     //Assert, that the login is successful.
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
     //Create a new mail (fill addressee, subject and body fields).
@@ -43,14 +40,10 @@ public class MailTests extends BaseMailTest {
     //Verify, that the mail disappeared from ‘Drafts’ folder.
     draftsPage.openPage();
     assertEquals(draftsPage.getNoDraftsMessageText(), "У вас нет незаконченных\nили неотправленных писем");
-    //Log off.
-    baseMailPage.logOff();
   }
 
   @Test
   public void saveAsTemplateAndSendMail() {
-    homePage = new HomePage(driver);
-    homePage.signIn(login, password);
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
     baseMailPage = new BaseMailPage(driver);
     baseMailPage.startWritingLetter();
@@ -65,13 +58,10 @@ public class MailTests extends BaseMailTest {
     sentPage = new SentPage(driver);
     sentPage.openPage();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
-    baseMailPage.logOff();
   }
 
   @Test
   public void saveDraftThenDelete() {
-    homePage = new HomePage(driver);
-    homePage.signIn(login, password);
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
     baseMailPage = new BaseMailPage(driver);
     baseMailPage.startWritingLetter();
@@ -82,6 +72,5 @@ public class MailTests extends BaseMailTest {
     draftsPage = new DraftsPage(driver);
     draftsPage.openPage();
     draftsPage.deleteDraft();
-    baseMailPage.logOff();
   }
 }

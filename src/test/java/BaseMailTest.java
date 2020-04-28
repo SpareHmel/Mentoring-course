@@ -45,10 +45,13 @@ public class BaseMailTest {
     driver.manage().window().maximize();
     driver.get(propertyReader.readPropertyFile("mailLink"));
     setSignInOptions();
+    homePage = new HomePage(driver);
+    homePage.signIn(login, password);
   }
 
   @AfterMethod
   protected void tearDown() {
+    baseMailPage.logOff();
     driver.quit();
   }
 
