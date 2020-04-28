@@ -1,19 +1,21 @@
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.Test;
 import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.HomePage;
 import pages.SentPage;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import pages.TemplatePage;
 
 public class MailTests extends BaseMailTest {
 
+  private final String addressee = "hmel25@bk.ru";
+  private final String subject = "Elimination details";
+  private final String body = "4815162342";
+
   @Test
-  public void mailTest() {
-    final String addressee = "hmel25@bk.ru";
-    final String subject = "Elimination details";
-    final String body = "4815162342";
+  public void createDraftAndSendMail() {
     homePage = new HomePage(driver);
     homePage.signIn(login, password);
     //Assert, that the login is successful.
@@ -43,5 +45,42 @@ public class MailTests extends BaseMailTest {
     assertEquals(draftsPage.getNoDraftsMessageText(), "У вас нет незаконченных\nили неотправленных писем");
     //Log off.
     baseMailPage.logOff();
+  }
+
+  @Test
+  public void saveAsTemplateAndSendMail() {
+    homePage = new HomePage(driver);
+    homePage.signIn(login, password);
+    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    baseMailPage = new BaseMailPage(driver);
+    baseMailPage.startWritingLetter();
+    baseMailPage.fillAddresseeField(addressee);
+    baseMailPage.fillSubjectField(subject);
+    baseMailPage.fillBodyField(body);
+    baseMailPage.saveLetterAsTemplate();
+    templatePage = new TemplatePage(driver);
+    templatePage.openPage();
+    templatePage.openTemplate();
+    templatePage.sendMail();
+    sentPage = new SentPage(driver);
+    sentPage.openPage();
+    assertTrue(sentPage.getMailDetailsText().contains(subject));
+    baseMailPage.logOff();
+  }
+
+  @Test
+  public void saveDraftThenDelete() {
+    homePage = new HomePage(driver);
+    homePage.signIn(login, password);
+    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    baseMailPage = new BaseMailPage(driver);
+    baseMailPage.startWritingLetter();
+    baseMailPage.fillAddresseeField(addressee);
+    baseMailPage.fillSubjectField(subject);
+    baseMailPage.fillBodyField(body);
+    baseMailPage.saveMailAsDraft();
+    draftsPage = new DraftsPage(driver);
+    draftsPage.openPage();
+    draftsPage.deleteDraft();
   }
 }

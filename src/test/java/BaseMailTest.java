@@ -1,3 +1,5 @@
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,10 +14,8 @@ import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.HomePage;
 import pages.SentPage;
+import pages.TemplatePage;
 import utils.PropertyReader;
-
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class BaseMailTest {
 
@@ -27,6 +27,7 @@ public class BaseMailTest {
   protected HomePage homePage;
   protected DraftsPage draftsPage;
   protected SentPage sentPage;
+  protected TemplatePage templatePage;
 
   @BeforeSuite
   protected void setupDriverPath() {

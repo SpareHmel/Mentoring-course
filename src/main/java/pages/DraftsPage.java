@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +19,12 @@ public class DraftsPage extends BaseMailPage {
 
   @FindBy(css = ".letter-list .octopus__title")
   private WebElement noDraftsMessage;
+
+  @FindBy(css = ".dataset__items .mb-checkbox__block")
+  private WebElement draftCheckbox;
+
+  @FindBy(css = "span[data-title-shortcut='Del']")
+  private WebElement deleteDraftButton;
 
   public DraftsPage(WebDriver driver) {
     super(driver);
@@ -41,10 +46,17 @@ public class DraftsPage extends BaseMailPage {
 
   public void selectDraftAndSendMail() {
     draft.click();
-    fillBodyField(Keys.CONTROL, Keys.ENTER);
+    sendMail();
   }
 
   public String getNoDraftsMessageText() {
     return waitForPresence(noDraftsMessage).getText();
+  }
+
+  public void deleteDraft() {
+    alertHandling(draftCheckbox);
+    action.moveToElement(draft).perform();
+    draftCheckbox.click();
+    deleteDraftButton.click();
   }
 }

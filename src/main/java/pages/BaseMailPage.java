@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,12 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(id = "PH_logoutLink")
   private WebElement logOffButton;
 
+  @FindBy(xpath = "//div[@class='text--2BGkj']/..")
+  private WebElement templateButton;
+
+  @FindBy(css = ".control--2sQCu .ellipsis--2wDr9")
+  private WebElement templateSaveButton;
+
   public BaseMailPage(WebDriver driver) {
     super(driver);
   }
@@ -37,11 +44,11 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void startWritingLetter() {
-    writeLetterButton.click();
+    waitForPresence(writeLetterButton).click();
   }
 
   public void fillAddresseeField(String field) {
-    addresseeField.sendKeys(field);
+    waitForPresence(addresseeField).sendKeys(field);
   }
 
   public void fillSubjectField(String subject) {
@@ -62,5 +69,14 @@ public class BaseMailPage extends AbstractPage {
 
   public void logOff() {
     logOffButton.click();
+  }
+
+  public void saveLetterAsTemplate() {
+    templateButton.click();
+    templateSaveButton.click();
+  }
+
+  public void sendMail() {
+    fillBodyField(Keys.CONTROL, Keys.ENTER);
   }
 }
