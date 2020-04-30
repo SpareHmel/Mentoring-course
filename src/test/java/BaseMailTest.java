@@ -7,7 +7,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import pages.BaseMailPage;
@@ -35,14 +37,18 @@ public class BaseMailTest {
         Objects.requireNonNull(this.getClass().getClassLoader().getResource("chromedriver.exe")).getPath());
   }
 
-  @BeforeMethod
-  protected void setUp() {
+  @BeforeClass
+  protected void setUpDriver() {
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
     driver = new ChromeDriver(chromeOptions);
     driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
+  }
+
+  @BeforeMethod
+  protected void signIn() {
     driver.get(propertyReader.readPropertyFile("mailLink"));
     setSignInOptions();
     homePage = new HomePage(driver);
@@ -50,8 +56,12 @@ public class BaseMailTest {
   }
 
   @AfterMethod
-  protected void tearDown() {
+  protected void logOff() {
     baseMailPage.logOff();
+  }
+
+  @AfterClass
+  protected void tearDown() {
     driver.quit();
   }
 
