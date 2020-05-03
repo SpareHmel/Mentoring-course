@@ -56,7 +56,7 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void fillBodyField(CharSequence... body) {
-    bodyField.sendKeys(body);
+    actions.sendKeys(bodyField, body).build().perform();
   }
 
   public void saveMailAsDraft() {
@@ -77,6 +77,6 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void sendMail() {
-    fillBodyField(Keys.CONTROL, Keys.ENTER);
+    bodyField.sendKeys(Keys.CONTROL, Keys.RETURN);
   }
 }

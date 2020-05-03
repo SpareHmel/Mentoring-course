@@ -18,7 +18,7 @@ public class MailTests extends BaseMailTest {
     //Assert, that the login is successful.
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
     //Create a new mail (fill addressee, subject and body fields).
-    baseMailPage = new BaseMailPage(driver);
+    baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
     baseMailPage.fillSubjectField(subject);
@@ -27,14 +27,14 @@ public class MailTests extends BaseMailTest {
     baseMailPage.saveMailAsDraft();
     baseMailPage.closeMessageWindow();
     //Verify the draft content (addressee, subject and body – should be the same as in 3).
-    draftsPage = new DraftsPage(driver);
+    draftsPage = new DraftsPage(getDriver());
     draftsPage.openPage();
     assertTrue(draftsPage.isDraftsAddresseeDisplayed());
-    assertEquals(draftsPage.getDraftsSubjectText(), subject);
+    assertTrue(draftsPage.getDraftsSubjectText().contains(subject));
     //Send the mail.
     draftsPage.selectDraftAndSendMail();
     //Verify, that the mail is in ‘Sent’ folder
-    sentPage = new SentPage(driver);
+    sentPage = new SentPage(getDriver());
     sentPage.openPage();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
     //Verify, that the mail disappeared from ‘Drafts’ folder.
@@ -45,17 +45,17 @@ public class MailTests extends BaseMailTest {
   @Test
   public void saveAsTemplateAndSendMail() {
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
-    baseMailPage = new BaseMailPage(driver);
+    baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
     baseMailPage.fillSubjectField(subject);
     baseMailPage.fillBodyField(body);
     baseMailPage.saveLetterAsTemplate();
-    templatePage = new TemplatePage(driver);
+    templatePage = new TemplatePage(getDriver());
     templatePage.openPage();
     templatePage.openTemplate();
     templatePage.sendMail();
-    sentPage = new SentPage(driver);
+    sentPage = new SentPage(getDriver());
     sentPage.openPage();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
   }
@@ -63,13 +63,13 @@ public class MailTests extends BaseMailTest {
   @Test
   public void saveDraftThenDelete() {
     isTitlePresentedWithText("Входящие - Почта Mail.ru");
-    baseMailPage = new BaseMailPage(driver);
+    baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
     baseMailPage.fillSubjectField(subject);
     baseMailPage.fillBodyField(body);
     baseMailPage.saveMailAsDraft();
-    draftsPage = new DraftsPage(driver);
+    draftsPage = new DraftsPage(getDriver());
     draftsPage.openPage();
     draftsPage.deleteDraft();
   }

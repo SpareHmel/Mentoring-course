@@ -27,10 +27,12 @@ public class HomePage extends AbstractPage {
   }
 
   public void signIn(String login, String password) {
+    waitPageForLoad();
     loginField.clear();
     loginField.sendKeys(login);
+    waitPageForLoad();
     submitButton.click();
-    waitForPresence(passwordField).sendKeys(password);
+    passwordField.sendKeys(password);
     submitButton.click();
   }
 }

@@ -1,10 +1,13 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -22,7 +25,7 @@ import utils.PropertyReader;
 public class BaseMailTest {
 
   PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
-  protected WebDriver driver;
+  private static WebDriver driver;
   protected String login;
   protected String password;
   protected BaseMailPage baseMailPage;
@@ -30,6 +33,24 @@ public class BaseMailTest {
   protected DraftsPage draftsPage;
   protected SentPage sentPage;
   protected TemplatePage templatePage;
+
+  public static WebDriver getDriver() {
+    if (driver == null) {
+      setDriver();
+    }
+    return driver;
+  }
+
+  private static void setDriver() {
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions chromeOptions = new ChromeOptions();
+    chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+    try {
+      driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+  }
 
   @BeforeSuite
   protected void setupDriverPath() {
@@ -39,9 +60,7 @@ public class BaseMailTest {
 
   @BeforeClass
   protected void setUpDriver() {
-    ChromeOptions chromeOptions = new ChromeOptions();
-    chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-    driver = new ChromeDriver(chromeOptions);
+    driver = getDriver();
     driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
