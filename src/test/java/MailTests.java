@@ -12,11 +12,12 @@ public class MailTests extends BaseMailTest {
   private final String addressee = "hmel25@bk.ru";
   private final String subject = "Elimination details";
   private final String body = "4815162342";
+  private final String title = "Входящие - Почта Mail.ru";
 
   @Test
   public void createDraftAndSendMail() {
     //Assert, that the login is successful.
-    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    isTitlePresentedWithText(title);
     //Create a new mail (fill addressee, subject and body fields).
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
@@ -44,7 +45,7 @@ public class MailTests extends BaseMailTest {
 
   @Test
   public void saveAsTemplateAndSendMail() {
-    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
@@ -62,7 +63,7 @@ public class MailTests extends BaseMailTest {
 
   @Test
   public void saveDraftThenDelete() {
-    isTitlePresentedWithText("Входящие - Почта Mail.ru");
+    isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
@@ -72,5 +73,16 @@ public class MailTests extends BaseMailTest {
     draftsPage = new DraftsPage(getDriver());
     draftsPage.openPage();
     draftsPage.deleteDraft();
+  }
+
+  @Test
+  public void moveToAddresseeCopy() throws InterruptedException {
+    isTitlePresentedWithText(title);
+    baseMailPage = new BaseMailPage(getDriver());
+    baseMailPage.startWritingLetter();
+    baseMailPage.fillAddresseeField(addressee);
+    baseMailPage.moveAddresseeToCopy();
+    baseMailPage.checkAddresseeVisibility();
+    baseMailPage.closeMessageWindow();
   }
 }

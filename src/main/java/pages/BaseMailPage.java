@@ -34,6 +34,18 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(xpath = "//div[contains(@class, 'datalist_visible')]//div[contains(@class, 'control')]")
   private WebElement templateSaveButton;
 
+  @FindBy(xpath = "//div[@class='contactsControls--3iwxE']//button[1]")
+  private WebElement copyAddresseeButton;
+
+  @FindBy(xpath = "//span[@class='text--1tHKB']/..")
+  private WebElement addressee;
+
+  @FindBy(xpath = "(//div[@class='contactsContainer--3RMuQ'])[2]")
+  private WebElement copyField;
+
+  @FindBy(xpath = "//div[@class='container--3B3Lm status_base--wsRcM']/..")
+  private WebElement copyFieldAddressee;
+
   public BaseMailPage(WebDriver driver) {
     super(driver);
   }
@@ -78,5 +90,14 @@ public class BaseMailPage extends AbstractPage {
 
   public void sendMail() {
     bodyField.sendKeys(Keys.CONTROL, Keys.RETURN);
+  }
+
+  public void moveAddresseeToCopy() {
+    copyAddresseeButton.click();
+    actions.dragAndDrop(addressee, copyField).build().perform();
+  }
+
+  public void checkAddresseeVisibility() {
+    waitForPresence(copyFieldAddressee).isDisplayed();
   }
 }

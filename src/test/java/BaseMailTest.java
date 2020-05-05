@@ -1,11 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +15,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.HomePage;
@@ -45,17 +45,14 @@ public class BaseMailTest {
     WebDriverManager.chromedriver().setup();
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+    chromeOptions.setCapability("platform", Platform.WINDOWS);
+    chromeOptions.setCapability("browserName", BrowserType.CHROME);
+    chromeOptions.setCapability("javascriptEnabled", true);
     try {
       driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
-  }
-
-  @BeforeSuite
-  protected void setupDriverPath() {
-    System.setProperty("webdriver.chrome.driver",
-        Objects.requireNonNull(this.getClass().getClassLoader().getResource("chromedriver.exe")).getPath());
   }
 
   @BeforeClass
