@@ -11,6 +11,9 @@ public class SentPage extends BaseMailPage {
   @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
   private WebElement mail;
 
+  @FindBy(xpath = "(//div[@class='dataset__items']//a[@data-id])[last()]")
+  private WebElement lastSentMail;
+
   public SentPage(WebDriver driver) {
     super(driver);
   }
@@ -23,5 +26,10 @@ public class SentPage extends BaseMailPage {
   public String getMailDetailsText() {
     alertHandling(mail);
     return mail.getText();
+  }
+
+  public void scrollToLastSentMail() {
+    scrollToElement(lastSentMail);
+    waitForPresence(lastSentMail).isDisplayed();
   }
 }

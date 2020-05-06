@@ -20,6 +20,7 @@ public abstract class AbstractPage {
   protected static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   protected static final String BASE_URL = propertyReader.readPropertyFile("baseUrl");
   protected Actions actions;
+  JavascriptExecutor js;
 
   public abstract AbstractPage openPage();
 
@@ -28,6 +29,7 @@ public abstract class AbstractPage {
     PageFactory.initElements(driver, this);
     wait = new WebDriverWait(driver, 10);
     actions = new Actions(driver);
+    js = (JavascriptExecutor) this.driver;
   }
 
   protected void alertHandling(WebElement webElement) {
@@ -49,8 +51,20 @@ public abstract class AbstractPage {
     return wait.until(ExpectedConditions.visibilityOf(webElement));
   }
 
+  protected WebElement waitForClickable(WebElement webElement) {
+    return wait.until(ExpectedConditions.elementToBeClickable(webElement));
+  }
+
+  protected void jsClick(WebElement webElement) {
+    js.executeScript("arguments[0].click();", webElement);
+  }
+
   protected void waitPageForLoad() {
     wait.until((ExpectedCondition<Boolean>) driver ->
-        ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        js.executeScript("return document.readyState").equals("complete"));
+  }
+
+  protected void scrollToElement(WebElement webElement) {
+    js.executeScript("arguments[0].scrollIntoView();", webElement);
   }
 }

@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
@@ -73,7 +74,7 @@ public class BaseMailTest {
 
   @AfterMethod
   protected void logOff() {
-    baseMailPage.logOff();
+    getDriver().findElement(By.id("PH_logoutLink")).click();
   }
 
   @AfterClass

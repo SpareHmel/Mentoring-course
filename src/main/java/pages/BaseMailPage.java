@@ -68,7 +68,7 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void fillBodyField(CharSequence... body) {
-    actions.sendKeys(bodyField, body).build().perform();
+    bodyField.sendKeys(body);
   }
 
   public void saveMailAsDraft() {
@@ -76,11 +76,12 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void closeMessageWindow() {
-    closeButton.click();
+    actions.moveToElement(closeButton).click().build().perform();
   }
 
   public void logOff() {
-    waitForPresence(logOffButton).click();
+    logOffButton.click();
+//    waitForPresence(driver.findElement(By.id("PH_logoutLink"))).click();
   }
 
   public void saveLetterAsTemplate() {

@@ -84,5 +84,14 @@ public class MailTests extends BaseMailTest {
     baseMailPage.moveAddresseeToCopy();
     baseMailPage.checkAddresseeVisibility();
     baseMailPage.closeMessageWindow();
+    Thread.sleep(100);
+  }
+
+  @Test
+  public void scrollToLastSentMail() {
+    isTitlePresentedWithText(title);
+    sentPage = new SentPage(getDriver());
+    sentPage.openPage();
+    sentPage.scrollToLastSentMail();
   }
 }
