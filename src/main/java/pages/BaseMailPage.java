@@ -80,10 +80,6 @@ public class BaseMailPage extends AbstractPage {
     acceptAlertIfPresent();
   }
 
-  public void logOff() {
-    logOffButton.click();
-  }
-
   public void saveLetterAsTemplate() {
     templateButton.click();
     templateSaveButton.click();

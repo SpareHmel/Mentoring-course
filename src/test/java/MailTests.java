@@ -78,7 +78,7 @@ public class MailTests extends BaseMailTest {
   }
 
   @Test
-  public void moveToAddresseeCopy() throws InterruptedException {
+  public void moveToAddresseeCopy() {
     isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
@@ -93,6 +93,7 @@ public class MailTests extends BaseMailTest {
     isTitlePresentedWithText(title);
     sentPage = new SentPage(getDriver());
     sentPage.openPage();
-    assertTrue(sentPage.scrollToLastSentMailAndCheckIfDisplayed());
+    sentPage.scrollToLastSentMail();
+    assertTrue(sentPage.checkLastSentMailVisibility());
   }
 }
