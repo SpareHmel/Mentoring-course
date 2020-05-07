@@ -94,6 +94,6 @@ public class MailTests extends BaseMailTest {
     sentPage = new SentPage(getDriver());
     sentPage.openPage();
     sentPage.scrollToLastSentMail();
-    assertTrue(sentPage.checkLastSentMailVisibility());
+    assertTrue(sentPage.isSentMailDisplayed());
   }
 }

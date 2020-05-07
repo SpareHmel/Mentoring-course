@@ -32,7 +32,7 @@ public class SentPage extends BaseMailPage {
     scrollToElement(lastSentMail);
   }
 
-  public boolean checkLastSentMailVisibility() {
+  public boolean isSentMailDisplayed() {
     return waitForPresence(lastSentMail).isDisplayed();
   }
 }
