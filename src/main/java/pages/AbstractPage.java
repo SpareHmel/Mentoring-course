@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public abstract class AbstractPage {
   protected static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   protected static final String BASE_URL = propertyReader.readPropertyFile("baseUrl");
   protected Actions actions;
-  JavascriptExecutor js;
+  protected JavascriptExecutor js;
 
   public abstract AbstractPage openPage();
 
@@ -46,6 +47,17 @@ public abstract class AbstractPage {
       }
     }
   }
+
+  protected void acceptAlertIfPresent() {
+    try {
+      wait.until(ExpectedConditions.alertIsPresent());
+      Alert alert = driver.switchTo().alert();
+      alert.accept();
+    } catch (TimeoutException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   protected WebElement waitForPresence(WebElement webElement) {
     return wait.until(ExpectedConditions.visibilityOf(webElement));

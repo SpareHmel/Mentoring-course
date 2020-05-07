@@ -28,8 +28,8 @@ public class SentPage extends BaseMailPage {
     return mail.getText();
   }
 
-  public void scrollToLastSentMail() {
+  public boolean scrollToLastSentMailAndCheckIfDisplayed() {
     scrollToElement(lastSentMail);
-    waitForPresence(lastSentMail).isDisplayed();
+    return waitForPresence(lastSentMail).isDisplayed();
   }
 }

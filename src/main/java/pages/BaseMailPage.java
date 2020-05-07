@@ -76,12 +76,12 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void closeMessageWindow() {
-    actions.moveToElement(closeButton).click().build().perform();
+    closeButton.click();
+    acceptAlertIfPresent();
   }
 
   public void logOff() {
     logOffButton.click();
-//    waitForPresence(driver.findElement(By.id("PH_logoutLink"))).click();
   }
 
   public void saveLetterAsTemplate() {
@@ -98,7 +98,7 @@ public class BaseMailPage extends AbstractPage {
     actions.dragAndDrop(addressee, copyField).build().perform();
   }
 
-  public void checkAddresseeVisibility() {
-    waitForPresence(copyFieldAddressee).isDisplayed();
+  public boolean checkAddresseeVisibility() {
+    return waitForPresence(copyFieldAddressee).isDisplayed();
   }
 }

@@ -13,6 +13,7 @@ public class MailTests extends BaseMailTest {
   private final String subject = "Elimination details";
   private final String body = "4815162342";
   private final String title = "Входящие - Почта Mail.ru";
+  private final String noDrafts = "У вас нет незаконченных\nили неотправленных писем";
 
   @Test
   public void createDraftAndSendMail() {
@@ -40,7 +41,7 @@ public class MailTests extends BaseMailTest {
     assertTrue(sentPage.getMailDetailsText().contains(subject));
     //Verify, that the mail disappeared from ‘Drafts’ folder.
     draftsPage.openPage();
-    assertEquals(draftsPage.getNoDraftsMessageText(), "У вас нет незаконченных\nили неотправленных писем");
+    assertEquals(draftsPage.getNoDraftsMessageText(), noDrafts);
   }
 
   @Test
@@ -73,6 +74,7 @@ public class MailTests extends BaseMailTest {
     draftsPage = new DraftsPage(getDriver());
     draftsPage.openPage();
     draftsPage.deleteDraft();
+    assertEquals(draftsPage.getNoDraftsMessageText(), noDrafts);
   }
 
   @Test
@@ -82,9 +84,8 @@ public class MailTests extends BaseMailTest {
     baseMailPage.startWritingLetter();
     baseMailPage.fillAddresseeField(addressee);
     baseMailPage.moveAddresseeToCopy();
-    baseMailPage.checkAddresseeVisibility();
+    assertTrue(baseMailPage.checkAddresseeVisibility());
     baseMailPage.closeMessageWindow();
-    Thread.sleep(100);
   }
 
   @Test
@@ -92,6 +93,6 @@ public class MailTests extends BaseMailTest {
     isTitlePresentedWithText(title);
     sentPage = new SentPage(getDriver());
     sentPage.openPage();
-    sentPage.scrollToLastSentMail();
+    assertTrue(sentPage.scrollToLastSentMailAndCheckIfDisplayed());
   }
 }
