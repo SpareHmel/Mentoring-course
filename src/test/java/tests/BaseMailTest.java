@@ -1,3 +1,6 @@
+package tests;
+
+import driverManager.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -6,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,11 +25,12 @@ import pages.DraftsPage;
 import pages.HomePage;
 import pages.SentPage;
 import pages.TemplatePage;
+import user.User;
 import utils.PropertyReader;
 
 public class BaseMailTest {
 
-  PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
+  public static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   private static WebDriver driver;
   protected String login;
   protected String password;
@@ -35,30 +40,31 @@ public class BaseMailTest {
   protected SentPage sentPage;
   protected TemplatePage templatePage;
 
-  public static WebDriver getDriver() {
-    if (driver == null) {
-      setDriver();
-    }
-    return driver;
-  }
+//  public static WebDriver getDriver() {
+//    if (driver == null) {
+//      setDriver();
+//    }
+//    return driver;
+//  }
 
-  private static void setDriver() {
-    WebDriverManager.chromedriver().setup();
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-    capabilities.setCapability("platform", Platform.WINDOWS);
-    capabilities.setCapability("browserName", BrowserType.CHROME);
-    capabilities.setCapability("javascriptEnabled", true);
-    try {
-      driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
-    }
-  }
+//  private static void setDriver() {
+//    WebDriverManager.chromedriver().setup();
+//    DesiredCapabilities capabilities = new DesiredCapabilities();
+//    capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+//    capabilities.setCapability("platform", Platform.WINDOWS);
+//    capabilities.setCapability("browserName", BrowserType.CHROME);
+//    capabilities.setCapability("javascriptEnabled", true);
+////    try {
+////      driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+////    } catch (MalformedURLException e) {
+////      e.printStackTrace();
+////    }
+//    driver = new ChromeDriver(capabilities);
+//  }
 
   @BeforeClass
   protected void setUp() {
-    driver = getDriver();
+    driver = DriverManager.getDriver();
     driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
         .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
     driver.manage().window().maximize();
@@ -67,14 +73,14 @@ public class BaseMailTest {
   @BeforeMethod
   protected void signIn() {
     driver.get(propertyReader.readPropertyFile("mailLink"));
-    setSignInOptions();
+    setSignInOptions(new User());
     homePage = new HomePage(driver);
     homePage.signIn(login, password);
   }
 
   @AfterMethod
   protected void logOff() {
-    getDriver().findElement(By.id("PH_logoutLink")).click();
+    DriverManager.getDriver().findElement(By.id("PH_logoutLink")).click();
   }
 
   @AfterClass
@@ -82,9 +88,11 @@ public class BaseMailTest {
     driver.quit();
   }
 
-  private void setSignInOptions() {
-    login = propertyReader.readPropertyFile("login");
-    password = propertyReader.readPropertyFile("password");
+  private void setSignInOptions(User user) {
+//    login = propertyReader.readPropertyFile("login");
+//    password = propertyReader.readPropertyFile("password");
+    login = user.getLogin();
+    password = user.getPassword();
   }
 
   protected void isTitlePresentedWithText(String title) {

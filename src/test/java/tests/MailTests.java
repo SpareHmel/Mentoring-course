@@ -1,3 +1,6 @@
+package tests;
+
+import static driverManager.DriverManager.getDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
