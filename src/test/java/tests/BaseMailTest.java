@@ -1,19 +1,9 @@
 package tests;
 
 import driverManager.DriverManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -39,28 +29,6 @@ public class BaseMailTest {
   protected DraftsPage draftsPage;
   protected SentPage sentPage;
   protected TemplatePage templatePage;
-
-//  public static WebDriver getDriver() {
-//    if (driver == null) {
-//      setDriver();
-//    }
-//    return driver;
-//  }
-
-//  private static void setDriver() {
-//    WebDriverManager.chromedriver().setup();
-//    DesiredCapabilities capabilities = new DesiredCapabilities();
-//    capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-//    capabilities.setCapability("platform", Platform.WINDOWS);
-//    capabilities.setCapability("browserName", BrowserType.CHROME);
-//    capabilities.setCapability("javascriptEnabled", true);
-////    try {
-////      driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-////    } catch (MalformedURLException e) {
-////      e.printStackTrace();
-////    }
-//    driver = new ChromeDriver(capabilities);
-//  }
 
   @BeforeClass
   protected void setUp() {
@@ -89,8 +57,6 @@ public class BaseMailTest {
   }
 
   private void setSignInOptions(User user) {
-//    login = propertyReader.readPropertyFile("login");
-//    password = propertyReader.readPropertyFile("password");
     login = user.getLogin();
     password = user.getPassword();
   }
