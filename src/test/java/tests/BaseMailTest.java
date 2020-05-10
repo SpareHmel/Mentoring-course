@@ -1,6 +1,6 @@
 package tests;
 
-import driverManager.DriverManager;
+import driver_manager.DriverManager;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
