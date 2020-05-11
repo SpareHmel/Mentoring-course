@@ -1,7 +1,6 @@
 package tests;
 
 import driver_manager.DriverManager;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,8 +21,6 @@ public class BaseMailTest {
 
   public static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   private static WebDriver driver;
-  protected String login;
-  protected String password;
   protected BaseMailPage baseMailPage;
   protected HomePage homePage;
   protected DraftsPage draftsPage;
@@ -33,17 +30,13 @@ public class BaseMailTest {
   @BeforeClass
   protected void setUp() {
     driver = DriverManager.getDriver();
-    driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyReader
-        .readPropertyFile("implicitlyWaitDefault")), TimeUnit.SECONDS);
-    driver.manage().window().maximize();
   }
 
   @BeforeMethod
   protected void signIn() {
     driver.get(propertyReader.readPropertyFile("mailLink"));
-    setSignInOptions(new User());
     homePage = new HomePage(driver);
-    homePage.signIn(login, password);
+    homePage.signIn(new User("login", "password"));
   }
 
   @AfterMethod
@@ -54,11 +47,6 @@ public class BaseMailTest {
   @AfterClass
   protected void tearDown() {
     driver.quit();
-  }
-
-  private void setSignInOptions(User user) {
-    login = user.getLogin();
-    password = user.getPassword();
   }
 
   protected void isTitlePresentedWithText(String title) {

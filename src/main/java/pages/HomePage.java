@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import user.User;
 
 public class HomePage extends AbstractPage {
 
@@ -26,13 +27,13 @@ public class HomePage extends AbstractPage {
     return this;
   }
 
-  public void signIn(String login, String password) {
+  public void signIn(User user) {
     waitPageForLoad();
     loginField.clear();
-    loginField.sendKeys(login);
+    loginField.sendKeys(user.getLogin());
     waitPageForLoad();
     submitButton.click();
-    passwordField.sendKeys(password);
+    passwordField.sendKeys(user.getPassword());
     submitButton.click();
   }
 }
