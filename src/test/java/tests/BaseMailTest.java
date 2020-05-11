@@ -21,13 +21,14 @@ public class BaseMailTest {
 
   public static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   private static WebDriver driver;
-  private final String login = propertyReader.readPropertyFile("login");
-  private final String password = propertyReader.readPropertyFile("password");
   protected BaseMailPage baseMailPage;
   protected HomePage homePage;
   protected DraftsPage draftsPage;
   protected SentPage sentPage;
   protected TemplatePage templatePage;
+
+  private final String login = propertyReader.readPropertyFile("login");
+  private final String password = propertyReader.readPropertyFile("password");
 
   @BeforeClass
   protected void setUp() {
