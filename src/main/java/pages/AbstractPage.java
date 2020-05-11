@@ -16,12 +16,13 @@ import utils.PropertyReader;
 
 public abstract class AbstractPage {
 
-  protected WebDriver driver;
-  protected WebDriverWait wait;
   protected static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
+
+  protected final WebDriver driver;
+  protected final WebDriverWait wait;
   protected static final String BASE_URL = propertyReader.readPropertyFile("baseUrl");
-  protected Actions actions;
-  protected JavascriptExecutor js;
+  protected final Actions actions;
+  protected final JavascriptExecutor js;
 
   public abstract AbstractPage openPage();
 
@@ -58,17 +59,8 @@ public abstract class AbstractPage {
     }
   }
 
-
   protected WebElement waitForPresence(WebElement webElement) {
     return wait.until(ExpectedConditions.visibilityOf(webElement));
-  }
-
-  protected WebElement waitForClickable(WebElement webElement) {
-    return wait.until(ExpectedConditions.elementToBeClickable(webElement));
-  }
-
-  protected void jsClick(WebElement webElement) {
-    js.executeScript("arguments[0].click();", webElement);
   }
 
   protected void waitPageForLoad() {
