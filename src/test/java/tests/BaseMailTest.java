@@ -1,6 +1,7 @@
 package tests;
 
 import driver_manager.DriverManager;
+import entities.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,13 +15,14 @@ import pages.DraftsPage;
 import pages.HomePage;
 import pages.SentPage;
 import pages.TemplatePage;
-import user.User;
 import utils.PropertyReader;
 
 public class BaseMailTest {
 
   public static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   private static WebDriver driver;
+  private final String login = propertyReader.readPropertyFile("login");
+  private final String password = propertyReader.readPropertyFile("password");
   protected BaseMailPage baseMailPage;
   protected HomePage homePage;
   protected DraftsPage draftsPage;
@@ -36,7 +38,7 @@ public class BaseMailTest {
   protected void signIn() {
     driver.get(propertyReader.readPropertyFile("mailLink"));
     homePage = new HomePage(driver);
-    homePage.signIn(new User("login", "password"));
+    homePage.signIn(new User(login, password));
   }
 
   @AfterMethod
