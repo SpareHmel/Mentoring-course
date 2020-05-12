@@ -17,6 +17,8 @@
     <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <webdrivermanager.version>3.8.1</webdrivermanager.version>
+    <jdi.version>1.2.8</jdi.version>
+    <jdi.versionold></jdi.versionold>
   </properties>
 
   <dependencies>
@@ -50,6 +52,12 @@
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>${webdrivermanager.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.epam.jdi</groupId>
+      <artifactId>jdi-light-html</artifactId>
+      <version>${jdi.version}</version>
     </dependency>
   </dependencies>
 
