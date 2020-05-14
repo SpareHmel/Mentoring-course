@@ -9,16 +9,13 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
+    <driver>chrome</driver>
     <java.version>1.8</java.version>
-    <testng.version>7.1.0</testng.version>
-    <selenium.version>3.141.59</selenium.version>
+    <testng.version>6.14.3</testng.version>
+    <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+    <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
     <hamcrest.version>2.1</hamcrest.version>
-    <lombok.version>1.18.8</lombok.version>
-    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <webdrivermanager.version>3.8.1</webdrivermanager.version>
-    <jdi.version>1.2.8</jdi.version>
-    <jdi.versionold></jdi.versionold>
+    <jdi.version>1.1.16</jdi.version>
   </properties>
 
   <dependencies>
@@ -29,9 +26,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${selenium.version}</version>
+      <groupId>com.epam.jdi</groupId>
+      <artifactId>jdi-light-html</artifactId>
+      <version>${jdi.version}</version>
     </dependency>
 
     <dependency>
@@ -39,25 +36,6 @@
       <artifactId>hamcrest</artifactId>
       <version>${hamcrest.version}</version>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.bonigarcia</groupId>
-      <artifactId>webdrivermanager</artifactId>
-      <version>${webdrivermanager.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.epam.jdi</groupId>
-      <artifactId>jdi-light-html</artifactId>
-      <version>${jdi.version}</version>
     </dependency>
   </dependencies>
 
@@ -80,5 +58,15 @@
         <version>${maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
+
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
 </project>

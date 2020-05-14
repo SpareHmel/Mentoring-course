@@ -1,18 +1,20 @@
 package jdi_pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 import entities.User;
 
-public class HomeJdi extends WebPage {
+public class HomePage extends WebPage {
 
-  @Css("#mailbox:login")
+  @XPath("//input[@id='mailbox:login']")
   public static TextField loginField;
-  @Css("#mailbox:password")
+
+  @XPath("//input[@id='mailbox:password']")
   public static TextField passwordField;
-  @Css(".o-control[type='submit']")
+
+  @XPath("//input[@class='o-control']/..")
   public static Button submitButton;
 
   public static void signIn(User user) {

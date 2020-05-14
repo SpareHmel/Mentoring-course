@@ -1,14 +1,27 @@
 package sections;
 
+import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import jdi_pages.HomeJdi;
+import jdi_pages.BaseMailPage;
+import jdi_pages.DraftsPage;
+import jdi_pages.HomePage;
+import jdi_pages.SentPage;
+import jdi_pages.TemplatePage;
 
-//@JSite("https://mail.ru")
+@JSite("https://e.mail.ru")
 public class MailRuStaticSite {
 
-//  private static final String HOMEPAGE_URL = propertyReader.readPropertyFile("mailLink");
-
-  //  @Url("https://e.mail.ru") public static HomeJdi homePage;
   @Url("https://mail.ru")
-  public static HomeJdi homePage;
+  public static HomePage homePage;
+
+  public static BaseMailPage baseMailPage;
+
+  @Url("/drafts")
+  public static DraftsPage draftsPage;
+
+  @Url("/sent")
+  public static SentPage sentPage;
+
+  @Url("/templates")
+  public static TemplatePage templatePage;
 }
