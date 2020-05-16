@@ -9,7 +9,7 @@ import static sections.MailRuStaticSite.templatePage;
 
 import org.testng.annotations.Test;
 
-public class JdiTest extends JdiTestsBase {
+public class MailTests extends MailTestsBase {
 
   private final String addressee = "hmel25@bk.ru";
   private final String subject = "Elimination details";

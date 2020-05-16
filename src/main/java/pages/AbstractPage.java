@@ -1,4 +1,4 @@
-package jdi_pages;
+package pages;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import org.openqa.selenium.Alert;

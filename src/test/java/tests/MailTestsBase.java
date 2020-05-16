@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeSuite;
 import sections.MailRuStaticSite;
 import utils.PropertyReader;
 
-public class JdiTestsBase {
+public class MailTestsBase {
 
   private static final PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
   private final String login = propertyReader.readPropertyFile("login");

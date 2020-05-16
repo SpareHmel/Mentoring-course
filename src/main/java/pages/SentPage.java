@@ -1,4 +1,4 @@
-package jdi_pages;
+package pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;

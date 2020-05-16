@@ -1,4 +1,4 @@
-package jdi_pages;
+package pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;

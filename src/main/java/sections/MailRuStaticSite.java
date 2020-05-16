@@ -2,11 +2,11 @@ package sections;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import jdi_pages.BaseMailPage;
-import jdi_pages.DraftsPage;
-import jdi_pages.HomePage;
-import jdi_pages.SentPage;
-import jdi_pages.TemplatePage;
+import pages.BaseMailPage;
+import pages.DraftsPage;
+import pages.HomePage;
+import pages.SentPage;
+import pages.TemplatePage;
 
 @JSite("https://e.mail.ru")
 public class MailRuStaticSite {
