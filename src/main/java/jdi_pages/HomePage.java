@@ -9,15 +9,15 @@ import entities.User;
 public class HomePage extends WebPage {
 
   @XPath("//input[@id='mailbox:login']")
-  public static TextField loginField;
+  public TextField loginField;
 
   @XPath("//input[@id='mailbox:password']")
-  public static TextField passwordField;
+  public TextField passwordField;
 
   @XPath("//input[@class='o-control']/..")
-  public static Button submitButton;
+  public Button submitButton;
 
-  public static void signIn(User user) {
+  public void signIn(User user) {
     loginField.clear();
     loginField.sendKeys(user.getLogin());
     submitButton.click();

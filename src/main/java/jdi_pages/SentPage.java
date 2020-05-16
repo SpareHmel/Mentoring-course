@@ -7,5 +7,5 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 public class SentPage extends BaseMailPage {
 
   @XPath("//div[@class='dataset__items']//a[@data-id]")
-  public static JList<UIElement> mailsList;
+  public JList<UIElement> mailsList;
 }

@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 public class TemplatePage extends BaseMailPage {
 
   @Css(".dataset-letters a")
-  private static JList<UIElement> templatesList;
+  public JList<UIElement> templatesList;
 
   public void openTemplate() {
     templatesList.get(0).click();

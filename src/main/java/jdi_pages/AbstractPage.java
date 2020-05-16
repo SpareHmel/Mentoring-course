@@ -6,9 +6,11 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public abstract class AbstractPage extends WebPage {
 
-  protected final WebDriverWait wait = new WebDriverWait(driver(), 10);
+  protected final WebDriverWait wait = new WebDriverWait(driver(), Duration.ofSeconds(10));
 
   protected void acceptAlertIfPresent() {
     try {
