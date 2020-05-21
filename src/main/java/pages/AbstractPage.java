@@ -71,4 +71,8 @@ public abstract class AbstractPage {
   protected void scrollToElement(WebElement webElement) {
     js.executeScript("arguments[0].scrollIntoView();", webElement);
   }
+
+  protected void jsClick(WebElement webElement) {
+    js.executeScript("arguments[0].click();", webElement);
+  }
 }

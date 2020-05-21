@@ -4,6 +4,8 @@ import static driver_manager.DriverManager.getDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import factory.Mail;
+import factory.MailFactory;
 import org.testng.annotations.Test;
 import pages.BaseMailPage;
 import pages.DraftsPage;
@@ -12,9 +14,7 @@ import pages.TemplatePage;
 
 public class MailTests extends BaseMailTest {
 
-  private final String addressee = "hmel25@bk.ru";
   private final String subject = "Elimination details";
-  private final String body = "4815162342";
   private final String title = "Входящие - Почта Mail.ru";
   private final String noDrafts = "У вас нет незаконченных\nили неотправленных писем";
 
@@ -25,9 +25,8 @@ public class MailTests extends BaseMailTest {
     //Create a new mail (fill addressee, subject and body fields).
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
-    baseMailPage.fillAddresseeField(addressee);
-    baseMailPage.fillSubjectField(subject);
-    baseMailPage.fillBodyField(body);
+    Mail mail = MailFactory.createSimpleMail();
+    baseMailPage.fillInMailFields(mail);
     //Save the mail as a draft.
     baseMailPage.saveMailAsDraft();
     baseMailPage.closeMessageWindow();
@@ -51,10 +50,9 @@ public class MailTests extends BaseMailTest {
   public void saveAsTemplateAndSendMail() {
     isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
+    Mail mail = MailFactory.mailWithCustomBody("important text");
     baseMailPage.startWritingLetter();
-    baseMailPage.fillAddresseeField(addressee);
-    baseMailPage.fillSubjectField(subject);
-    baseMailPage.fillBodyField(body);
+    baseMailPage.fillInMailFields(mail);
     baseMailPage.saveLetterAsTemplate();
     templatePage = new TemplatePage(getDriver());
     templatePage.openPage();
@@ -70,9 +68,8 @@ public class MailTests extends BaseMailTest {
     isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
-    baseMailPage.fillAddresseeField(addressee);
-    baseMailPage.fillSubjectField(subject);
-    baseMailPage.fillBodyField(body);
+    Mail mail = MailFactory.createMailWithoutSubject();
+    baseMailPage.fillInMailFields(mail);
     baseMailPage.saveMailAsDraft();
     draftsPage = new DraftsPage(getDriver());
     draftsPage.openPage();
@@ -85,7 +82,8 @@ public class MailTests extends BaseMailTest {
     isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
     baseMailPage.startWritingLetter();
-    baseMailPage.fillAddresseeField(addressee);
+    Mail mail = MailFactory.createSimpleMail();
+    baseMailPage.fillInMailFields(mail);
     baseMailPage.moveAddresseeToCopy();
     assertTrue(baseMailPage.checkAddresseeVisibility());
     baseMailPage.closeMessageWindow();

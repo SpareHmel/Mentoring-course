@@ -1,5 +1,6 @@
 package pages;
 
+import factory.Mail;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,18 +60,6 @@ public class BaseMailPage extends AbstractPage {
     waitForPresence(writeLetterButton).click();
   }
 
-  public void fillAddresseeField(String field) {
-    waitForPresence(addresseeField).sendKeys(field);
-  }
-
-  public void fillSubjectField(String subject) {
-    subjectField.sendKeys(subject);
-  }
-
-  public void fillBodyField(CharSequence... body) {
-    bodyField.sendKeys(body);
-  }
-
   public void saveMailAsDraft() {
     saveAsDraftButton.click();
   }
@@ -96,5 +85,13 @@ public class BaseMailPage extends AbstractPage {
 
   public boolean checkAddresseeVisibility() {
     return waitForPresence(copyFieldAddressee).isDisplayed();
+  }
+
+  public void fillInMailFields(Mail mail) {
+    waitForPresence(addresseeField).sendKeys(mail.getAddressee());
+    if (mail.getSubject() != null) {
+      subjectField.sendKeys(mail.getSubject());
+    }
+    bodyField.sendKeys(mail.getBody());
   }
 }

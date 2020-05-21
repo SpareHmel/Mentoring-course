@@ -55,8 +55,7 @@ public class DraftsPage extends BaseMailPage {
 
   public void deleteDraft() {
     alertHandling(draftCheckbox);
-    actions.moveToElement(draft).perform();
-    draftCheckbox.click();
+    jsClick(draftCheckbox);
     deleteDraftButton.click();
   }
 }
