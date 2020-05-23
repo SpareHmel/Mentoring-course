@@ -11,7 +11,7 @@ public class Mail {
   static final String subjectText = "Elimination details";
   static final String bodyText = "4815162342";
 
-  private String addressee = null;
-  private String subject = null;
-  private String body = null;
+  private String addressee;
+  private String subject;
+  private String body;
 }
