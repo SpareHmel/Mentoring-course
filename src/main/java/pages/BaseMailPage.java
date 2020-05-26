@@ -1,5 +1,7 @@
 package pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import factory.Mail;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -51,9 +53,14 @@ public class BaseMailPage extends AbstractPage {
     super(driver);
   }
 
-  public BaseMailPage openPage() {
+  @Override
+  protected void load() {
     driver.get(BASE_URL);
-    return this;
+  }
+
+  @Override
+  protected void isLoaded() throws Error {
+    assertTrue("BaseMailPage isn't loaded", driver.getCurrentUrl().contains(BASE_URL));
   }
 
   public void startWritingLetter() {

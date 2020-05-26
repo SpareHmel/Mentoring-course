@@ -1,5 +1,7 @@
 package pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,9 +32,14 @@ public class DraftsPage extends BaseMailPage {
     super(driver);
   }
 
-  public DraftsPage openPage() {
+  @Override
+  protected void load() {
     driver.get(DRAFTS_PAGE_URL);
-    return this;
+  }
+
+  @Override
+  protected void isLoaded() throws Error {
+    assertTrue("DraftsPage isn't loaded", driver.getCurrentUrl().contains(DRAFTS_PAGE_URL));
   }
 
   public boolean isDraftsAddresseeDisplayed() {
@@ -54,7 +61,6 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public void deleteDraft() {
-    alertHandling(draftCheckbox);
     jsClick(draftCheckbox);
     deleteDraftButton.click();
   }

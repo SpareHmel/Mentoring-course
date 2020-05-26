@@ -1,5 +1,7 @@
 package pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import entities.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,9 +24,14 @@ public class HomePage extends AbstractPage {
     super(driver);
   }
 
-  public HomePage openPage() {
+  @Override
+  protected void load() {
     driver.get(HOMEPAGE_URL);
-    return this;
+  }
+
+  @Override
+  protected void isLoaded() throws Error {
+    assertTrue("HomePage isn't loaded", driver.getCurrentUrl().contains(HOMEPAGE_URL));
   }
 
   public void signIn(User user) {

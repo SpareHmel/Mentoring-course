@@ -11,10 +11,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyReader;
 
-public abstract class AbstractPage {
+public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
 
   protected static PropertyReader propertyReader = new PropertyReader("src/test/resources/config.properties");
 
@@ -24,14 +25,25 @@ public abstract class AbstractPage {
   protected final Actions actions;
   protected final JavascriptExecutor js;
 
-  public abstract AbstractPage openPage();
-
   public AbstractPage(WebDriver driver) {
     this.driver = driver;
     PageFactory.initElements(driver, this);
     wait = new WebDriverWait(driver, 10);
     actions = new Actions(driver);
     js = (JavascriptExecutor) this.driver;
+  }
+
+  @Override
+  public AbstractPage get() {
+    try {
+      this.isLoaded();
+      return this;
+    } catch (Error var2) {
+      this.load();
+      acceptAlertIfPresent();
+      this.isLoaded();
+      return this;
+    }
   }
 
   protected void alertHandling(WebElement webElement) {

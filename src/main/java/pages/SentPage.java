@@ -1,5 +1,7 @@
 package pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,9 +20,14 @@ public class SentPage extends BaseMailPage {
     super(driver);
   }
 
-  public SentPage openPage() {
+  @Override
+  protected void load() {
     driver.get(INBOX_PAGE_URL);
-    return this;
+  }
+
+  @Override
+  protected void isLoaded() throws Error {
+    assertTrue("InboxPage isn't loaded", driver.getCurrentUrl().contains(INBOX_PAGE_URL));
   }
 
   public String getMailDetailsText() {

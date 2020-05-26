@@ -32,17 +32,17 @@ public class MailTests extends BaseMailTest {
     baseMailPage.closeMessageWindow();
     //Verify the draft content (addressee, subject and body – should be the same as in 3).
     draftsPage = new DraftsPage(getDriver());
-    draftsPage.openPage();
+    draftsPage.get();
     assertTrue(draftsPage.isDraftsAddresseeDisplayed());
     assertTrue(draftsPage.getDraftsSubjectText().contains(subject));
     //Send the mail.
     draftsPage.selectDraftAndSendMail();
     //Verify, that the mail is in ‘Sent’ folder
     sentPage = new SentPage(getDriver());
-    sentPage.openPage();
+    sentPage.get();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
     //Verify, that the mail disappeared from ‘Drafts’ folder.
-    draftsPage.openPage();
+    draftsPage.get();
     assertEquals(draftsPage.getNoDraftsMessageText(), noDrafts);
   }
 
@@ -55,11 +55,11 @@ public class MailTests extends BaseMailTest {
     baseMailPage.fillInMailFields(mail);
     baseMailPage.saveLetterAsTemplate();
     templatePage = new TemplatePage(getDriver());
-    templatePage.openPage();
+    templatePage.get();
     templatePage.openTemplate();
     templatePage.sendMail();
     sentPage = new SentPage(getDriver());
-    sentPage.openPage();
+    sentPage.get();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
   }
 
@@ -72,7 +72,7 @@ public class MailTests extends BaseMailTest {
     baseMailPage.fillInMailFields(mail);
     baseMailPage.saveMailAsDraft();
     draftsPage = new DraftsPage(getDriver());
-    draftsPage.openPage();
+    draftsPage.get();
     draftsPage.deleteDraft();
     assertEquals(draftsPage.getNoDraftsMessageText(), noDrafts);
   }
@@ -93,7 +93,7 @@ public class MailTests extends BaseMailTest {
   public void scrollToLastSentMail() {
     isTitlePresentedWithText(title);
     sentPage = new SentPage(getDriver());
-    sentPage.openPage();
+    sentPage.get();
     sentPage.scrollToLastSentMail();
     assertTrue(sentPage.isSentMailDisplayed());
   }
