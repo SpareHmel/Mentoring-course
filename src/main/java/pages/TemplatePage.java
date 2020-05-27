@@ -23,7 +23,7 @@ public class TemplatePage extends BaseMailPage {
   }
 
   @Override
-  protected void isLoaded() throws Error {
+  protected void isLoaded() throws AssertionError {
     assertTrue("TemplatePage isn't loaded", driver.getCurrentUrl().contains(TEMPLATE_PAGE_URL));
   }
 

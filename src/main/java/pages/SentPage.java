@@ -26,7 +26,7 @@ public class SentPage extends BaseMailPage {
   }
 
   @Override
-  protected void isLoaded() throws Error {
+  protected void isLoaded() throws AssertionError {
     assertTrue("InboxPage isn't loaded", driver.getCurrentUrl().contains(INBOX_PAGE_URL));
   }
 

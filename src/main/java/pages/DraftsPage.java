@@ -38,7 +38,7 @@ public class DraftsPage extends BaseMailPage {
   }
 
   @Override
-  protected void isLoaded() throws Error {
+  protected void isLoaded() throws AssertionError {
     assertTrue("DraftsPage isn't loaded", driver.getCurrentUrl().contains(DRAFTS_PAGE_URL));
   }
 

@@ -59,7 +59,7 @@ public class BaseMailPage extends AbstractPage {
   }
 
   @Override
-  protected void isLoaded() throws Error {
+  protected void isLoaded() throws AssertionError {
     assertTrue("BaseMailPage isn't loaded", driver.getCurrentUrl().contains(BASE_URL));
   }
 

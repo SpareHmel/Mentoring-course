@@ -30,7 +30,7 @@ public class HomePage extends AbstractPage {
   }
 
   @Override
-  protected void isLoaded() throws Error {
+  protected void isLoaded() throws AssertionError {
     assertTrue("HomePage isn't loaded", driver.getCurrentUrl().contains(HOMEPAGE_URL));
   }
 
