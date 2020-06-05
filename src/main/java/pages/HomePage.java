@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends AbstractPage {
 
   private static final String HOMEPAGE_URL = propertyReader.readPropertyFile("mailLink");
+  private static HomePage instance;
 
   @FindBy(id = "mailbox:login")
   private WebElement loginField;
@@ -22,6 +23,13 @@ public class HomePage extends AbstractPage {
 
   public HomePage(WebDriver driver) {
     super(driver);
+  }
+
+  public static HomePage getInstance(WebDriver driver) {
+    if (instance == null || instance.driver != driver) {
+      instance = new HomePage(driver);
+    }
+    return instance;
   }
 
   @Override

@@ -6,7 +6,7 @@ import static factory.Mail.subjectText;
 
 public class MailFactory {
 
-  public static Mail createSimpleMail() {
+  public static Mail simpleMail() {
     Mail mail = new Mail();
     mail.setAddressee(addresseeText);
     mail.setSubject(subjectText);
@@ -14,14 +14,14 @@ public class MailFactory {
     return mail;
   }
 
-  public static Mail createMailWithoutSubject() {
-    Mail mail = createSimpleMail();
+  public static Mail mailWithoutSubject() {
+    Mail mail = simpleMail();
     mail.setSubject(null);
     return mail;
   }
 
   public static Mail mailWithCustomBody(String body) {
-    Mail mail = createSimpleMail();
+    Mail mail = simpleMail();
     mail.setBody(body);
     return mail;
   }

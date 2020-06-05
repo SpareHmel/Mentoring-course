@@ -9,12 +9,20 @@ import org.openqa.selenium.support.FindBy;
 public class TemplatePage extends BaseMailPage {
 
   private static final String TEMPLATE_PAGE_URL = BASE_URL + "/templates";
+  private static TemplatePage instance;
 
   @FindBy(css = ".dataset-letters a")
   private WebElement template;
 
   public TemplatePage(WebDriver driver) {
     super(driver);
+  }
+
+  public static TemplatePage getInstance(WebDriver driver) {
+    if (instance == null || instance.driver != driver) {
+      instance = new TemplatePage(driver);
+    }
+    return instance;
   }
 
   @Override

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class DraftsPage extends BaseMailPage {
 
   private static final String DRAFTS_PAGE_URL = BASE_URL + "/drafts";
+  private static DraftsPage instance;
 
   @FindBy(xpath = "//a[contains(@href, '/drafts/0')]")
   private WebElement draftsAddressee;
@@ -30,6 +31,13 @@ public class DraftsPage extends BaseMailPage {
 
   public DraftsPage(WebDriver driver) {
     super(driver);
+  }
+
+  public static DraftsPage getInstance(WebDriver driver) {
+    if (instance == null || instance.driver != driver) {
+      instance = new DraftsPage(driver);
+    }
+    return instance;
   }
 
   @Override

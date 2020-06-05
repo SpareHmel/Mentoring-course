@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class BaseMailPage extends AbstractPage {
 
+  private static BaseMailPage instance;
+
   @FindBy(className = "compose-button__txt")
   private WebElement writeLetterButton;
 
@@ -53,6 +55,13 @@ public class BaseMailPage extends AbstractPage {
     super(driver);
   }
 
+  public static BaseMailPage getInstance(WebDriver driver) {
+    if (instance == null || instance.driver != driver) {
+      instance = new BaseMailPage(driver);
+    }
+    return instance;
+  }
+
   @Override
   protected void load() {
     driver.get(BASE_URL);
@@ -76,7 +85,7 @@ public class BaseMailPage extends AbstractPage {
     acceptAlertIfPresent();
   }
 
-  public void saveLetterAsTemplate() {
+  public void saveMailAsTemplate() {
     templateButton.click();
     templateSaveButton.click();
   }
@@ -94,7 +103,7 @@ public class BaseMailPage extends AbstractPage {
     return waitForPresence(copyFieldAddressee).isDisplayed();
   }
 
-  public void fillInMailFields(Mail mail) {
+  public void fillInDesiredFields(Mail mail) {
     waitForPresence(addresseeField).sendKeys(mail.getAddressee());
     if (mail.getSubject() != null) {
       subjectField.sendKeys(mail.getSubject());

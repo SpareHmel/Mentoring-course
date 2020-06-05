@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class SentPage extends BaseMailPage {
 
   private static final String INBOX_PAGE_URL = BASE_URL + "/sent";
+  private static SentPage instance;
 
   @FindBy(xpath = "//div[@class='dataset__items']//a[@data-id]")
   private WebElement mail;
@@ -18,6 +19,13 @@ public class SentPage extends BaseMailPage {
 
   public SentPage(WebDriver driver) {
     super(driver);
+  }
+
+  public static SentPage getInstance(WebDriver driver) {
+    if (instance == null || instance.driver != driver) {
+      instance = new SentPage(driver);
+    }
+    return instance;
   }
 
   @Override
