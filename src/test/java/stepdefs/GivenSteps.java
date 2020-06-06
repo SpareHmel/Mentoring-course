@@ -9,12 +9,12 @@ public class GivenSteps extends BaseStep {
   private final String password = propertyReader.readPropertyFile("password");
 
   @Given("I open {string} page")
-  public void iOpenMailSite(String linkMain) {
+  public void iOpenPage(String linkMain) {
     driver.get(linkMain);
   }
 
-  @Given("^I login to the account")
-  public void iLogin() {
+  @Given("I login to the account")
+  public void iLoginToAccount() {
     homePage.signIn(new User(login, password));
   }
 }
