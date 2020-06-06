@@ -9,8 +9,6 @@ Feature: Basic mail functions
   Scenario: Create draft and send mail
     When I start writing letter
     And I create mail with 'default fields' using a template
-    And I create mail with 'custom body' using a template
-    And I create mail with 'missing subject' using a template
     And I save mail as draft
     And I close the message window
     And I open Drafts page
