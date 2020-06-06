@@ -53,10 +53,8 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
       try {
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
-        System.out.println("Alert data: " + alertText);
         alert.accept();
-      } catch (NoAlertPresentException e) {
-        e.printStackTrace();
+      } catch (NoAlertPresentException ignored) {
       }
     }
   }
@@ -66,8 +64,7 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       alert.accept();
-    } catch (TimeoutException e) {
-      e.printStackTrace();
+    } catch (TimeoutException ignored) {
     }
   }
 

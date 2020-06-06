@@ -1,6 +1,7 @@
 package stepdefs;
 
-import hooks.TestContext;
+import driver_manager.DriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BaseMailPage;
@@ -18,16 +19,17 @@ public abstract class BaseStep {
   protected DraftsPage draftsPage;
   protected SentPage sentPage;
   protected TemplatePage templatePage;
+  protected static WebDriver driver = DriverManager.getDriver();
 
   protected BaseStep() {
-    homePage = HomePage.getInstance(TestContext.getDriver());
-    baseMailPage = BaseMailPage.getInstance(TestContext.getDriver());
-    draftsPage = DraftsPage.getInstance(TestContext.getDriver());
-    sentPage = SentPage.getInstance(TestContext.getDriver());
-    templatePage = TemplatePage.getInstance(TestContext.getDriver());
+    homePage = HomePage.getInstance(driver);
+    baseMailPage = BaseMailPage.getInstance(driver);
+    draftsPage = DraftsPage.getInstance(driver);
+    sentPage = SentPage.getInstance(driver);
+    templatePage = TemplatePage.getInstance(driver);
   }
 
   protected void isTitlePresentedWithText(String title) {
-    new WebDriverWait(TestContext.getDriver(), 10).until(ExpectedConditions.titleContains(title));
+    new WebDriverWait(driver, 10).until(ExpectedConditions.titleContains(title));
   }
 }

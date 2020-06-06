@@ -11,25 +11,19 @@ public class ActionSteps extends BaseStep {
     baseMailPage.startWritingLetter();
   }
 
-  @When("^I fill in the fields using template with the desired values$")
-  public void iPrepareSimpleMail() {
-    Mail mail = MailFactory.simpleMail();
-    baseMailPage.fillInDesiredFields(mail);
-  }
-
-  @When("^I create mail with the desired '([^\"]*)'$")
+  @When("^I create mail with '([^\"]*)' using a template$")
   public void iCreateMailWithTheDesiredTemplate(String template) {
     Mail mail;
     switch (template) {
-      case ("simpleMail"):
+      case ("default fields"):
         mail = MailFactory.simpleMail();
         baseMailPage.fillInDesiredFields(mail);
         break;
-      case ("mailWithoutSubject"):
+      case ("missing subject"):
         mail = MailFactory.mailWithoutSubject();
         baseMailPage.fillInDesiredFields(mail);
         break;
-      case ("mailWithCustomBody"):
+      case ("custom body"):
         mail = MailFactory.mailWithCustomBody("Important text");
         baseMailPage.fillInDesiredFields(mail);
         break;
