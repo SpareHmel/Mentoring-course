@@ -33,7 +33,7 @@ public class AssertionSteps extends BaseStep {
     assertTrue(sentPage.getMailDetailsText().contains(subject));
   }
 
-  @Then("^I see in the Drafts box$")
+  @Then("I see in the Drafts box")
   public void iSeeInTheDraftsBoxMessage(String message) {
     assertEquals(draftsPage.getNoDraftsMessageText(), message);
   }
