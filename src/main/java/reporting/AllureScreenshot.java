@@ -42,6 +42,7 @@ public class AllureScreenshot {
   private static byte[] captureScreenshot(WebDriver driver) {
     byte[] screenshot = null;
     screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    MyLogger.info("Screenshot has been made");
     return screenshot;
   }
 }

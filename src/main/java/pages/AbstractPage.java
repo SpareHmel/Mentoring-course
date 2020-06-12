@@ -1,5 +1,6 @@
 package pages;
 
+import browser.Browser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
@@ -25,6 +26,7 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
   protected static final String BASE_URL = propertyReader.readPropertyFile("baseUrl");
   protected final Actions actions;
   protected final JavascriptExecutor js;
+  protected final Browser browser;
 
   public AbstractPage(WebDriver driver) {
     this.driver = driver;
@@ -32,6 +34,7 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
     wait = new WebDriverWait(driver, 10);
     actions = new Actions(driver);
     js = (JavascriptExecutor) this.driver;
+    browser = Browser.getInstance();
   }
 
   @Override
@@ -81,10 +84,12 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
   protected void scrollToElement(WebElement webElement) {
     js.executeScript("arguments[0].scrollIntoView();", webElement);
     MyLogger.info("Scrolled to the element " + webElement.getText() + "located: " + webElement);
+    browser.takeScreenshot();
   }
 
   protected void jsClick(WebElement webElement) {
     js.executeScript("arguments[0].click();", webElement);
     MyLogger.info("js click to the element" + webElement);
+    browser.takeScreenshot();
   }
 }

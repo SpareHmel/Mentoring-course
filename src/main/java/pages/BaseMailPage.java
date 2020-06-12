@@ -35,8 +35,9 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(xpath = "(//*[contains(@class, 'editor_container')]//div[contains(@class, 'withBorder')]//button)[last()]")
   private WebElement templateButton;
 
-  @FindBy(xpath = "//div[contains(@class, 'datalist_visible')]//div[contains(@class, 'control')]")
-  private WebElement templateSaveButton;
+//  @FindBy(xpath = "//div[contains(@class, 'datalist_visible')]//div[contains(@class, 'control')]")
+@FindBy(xpath = "//div[@data-test-id='templates']//div[@class='control--2sQCu']")
+private WebElement templateSaveButton;
 
   @FindBy(xpath = "//div[@class='contactsControls--3iwxE']//button[1]")
   private WebElement copyAddresseeButton;
@@ -79,8 +80,10 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void saveLetterAsTemplate() {
-    templateButton.click();
-    templateSaveButton.click();
+//    templateButton.click();
+//    templateSaveButton.click();
+    browser.click(templateButton);
+    browser.click(templateSaveButton);
     MyLogger.info("Letter was saved as template");
   }
 
