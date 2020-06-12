@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mentoring course">
+
+  <test name="Mail test">
+    <classes>
+      <class name="tests.MailTests"/>
+    </classes>
+  </test>
+</suite>

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import reporting.MyLogger;
 import utils.PropertyReader;
 
 public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
@@ -52,11 +53,8 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
     } catch (UnhandledAlertException f) {
       try {
         Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        System.out.println("Alert data: " + alertText);
         alert.accept();
-      } catch (NoAlertPresentException e) {
-        e.printStackTrace();
+      } catch (NoAlertPresentException ignore) {
       }
     }
   }
@@ -66,8 +64,8 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       alert.accept();
-    } catch (TimeoutException e) {
-      e.printStackTrace();
+    } catch (TimeoutException ignore) {
+      MyLogger.error("No alerts were detected");
     }
   }
 
@@ -82,9 +80,11 @@ public abstract class AbstractPage extends LoadableComponent<AbstractPage> {
 
   protected void scrollToElement(WebElement webElement) {
     js.executeScript("arguments[0].scrollIntoView();", webElement);
+    MyLogger.info("Scrolled to the element " + webElement.getText() + "located: " + webElement);
   }
 
   protected void jsClick(WebElement webElement) {
     js.executeScript("arguments[0].click();", webElement);
+    MyLogger.info("js click to the element" + webElement);
   }
 }

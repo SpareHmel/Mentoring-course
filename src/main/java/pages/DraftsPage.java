@@ -5,6 +5,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import reporting.MyLogger;
 
 public class DraftsPage extends BaseMailPage {
 
@@ -54,6 +55,7 @@ public class DraftsPage extends BaseMailPage {
   public void selectDraftAndSendMail() {
     draft.click();
     sendMail();
+    MyLogger.info("Draft was selected then sent");
   }
 
   public String getNoDraftsMessageText() {
@@ -63,5 +65,6 @@ public class DraftsPage extends BaseMailPage {
   public void deleteDraft() {
     jsClick(draftCheckbox);
     deleteDraftButton.click();
+    MyLogger.info("Selected draft was deleted");
   }
 }

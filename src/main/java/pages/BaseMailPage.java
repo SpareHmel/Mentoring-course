@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import reporting.MyLogger;
 
 public class BaseMailPage extends AbstractPage {
 
@@ -74,20 +75,24 @@ public class BaseMailPage extends AbstractPage {
   public void closeMessageWindow() {
     closeButton.click();
     acceptAlertIfPresent();
+    MyLogger.info("Message window is closed");
   }
 
   public void saveLetterAsTemplate() {
     templateButton.click();
     templateSaveButton.click();
+    MyLogger.info("Letter was saved as template");
   }
 
   public void sendMail() {
     bodyField.sendKeys(Keys.CONTROL, Keys.RETURN);
+    MyLogger.info("Mail was sent");
   }
 
   public void moveAddresseeToCopy() {
     copyAddresseeButton.click();
     actions.dragAndDrop(addressee, copyField).build().perform();
+    MyLogger.info("Addressee moved to the copy field");
   }
 
   public boolean checkAddresseeVisibility() {
@@ -96,9 +101,12 @@ public class BaseMailPage extends AbstractPage {
 
   public void fillInMailFields(Mail mail) {
     waitForPresence(addresseeField).sendKeys(mail.getAddressee());
+    MyLogger.info("Addressee was filled with text: " + mail.getAddressee());
     if (mail.getSubject() != null) {
       subjectField.sendKeys(mail.getSubject());
+      MyLogger.info("Subject was filled with text: " + mail.getSubject());
     }
     bodyField.sendKeys(mail.getBody());
+    MyLogger.info("Body was filled with text: " + mail.getBody());
   }
 }
