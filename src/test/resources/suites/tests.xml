@@ -3,7 +3,7 @@
 
   <test name="Mail test">
     <classes>
-      <class name="tests.MailTests"/>
+      <class name="tests.fsd"/>
     </classes>
   </test>
 </suite>

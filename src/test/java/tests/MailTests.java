@@ -46,7 +46,7 @@ public class MailTests extends BaseMailTest {
     assertEquals(draftsPage.getNoDraftsMessageText(), noDrafts);
   }
 
-  @Test
+  /*@Test
   public void saveAsTemplateAndSendMail() {
     isTitlePresentedWithText(title);
     baseMailPage = new BaseMailPage(getDriver());
@@ -62,6 +62,17 @@ public class MailTests extends BaseMailTest {
     sentPage.get();
     assertTrue(sentPage.getMailDetailsText().contains(subject));
   }
+
+  @Test
+  public void saveAsTemplateAndSedsdsfsfndMail() {
+    templatePage = new TemplatePage(getDriver());
+    templatePage.get();
+    templatePage.openTemplate();
+    templatePage.sendMail();
+    sentPage = new SentPage(getDriver());
+    sentPage.get();
+    assertTrue(sentPage.getMailDetailsText().contains(subject));
+  }*/
 
   @Test
   public void saveDraftThenDelete() {

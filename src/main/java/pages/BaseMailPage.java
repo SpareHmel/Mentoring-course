@@ -35,9 +35,8 @@ public class BaseMailPage extends AbstractPage {
   @FindBy(xpath = "(//*[contains(@class, 'editor_container')]//div[contains(@class, 'withBorder')]//button)[last()]")
   private WebElement templateButton;
 
-//  @FindBy(xpath = "//div[contains(@class, 'datalist_visible')]//div[contains(@class, 'control')]")
-@FindBy(xpath = "//div[@data-test-id='templates']//div[@class='control--2sQCu']")
-private WebElement templateSaveButton;
+  @FindBy(xpath = "//div[@data-test-id='templates']//div[@class='control--2sQCu']")
+  private WebElement templateSaveButton;
 
   @FindBy(xpath = "//div[@class='contactsControls--3iwxE']//button[1]")
   private WebElement copyAddresseeButton;
@@ -66,7 +65,7 @@ private WebElement templateSaveButton;
   }
 
   public void startWritingLetter() {
-    waitForPresence(writeLetterButton).click();
+    browser.waitForPresence(writeLetterButton).click();
   }
 
   public void saveMailAsDraft() {
@@ -75,7 +74,7 @@ private WebElement templateSaveButton;
 
   public void closeMessageWindow() {
     closeButton.click();
-    acceptAlertIfPresent();
+    browser.acceptAlertIfPresent();
     MyLogger.info("Message window is closed");
   }
 
@@ -99,11 +98,11 @@ private WebElement templateSaveButton;
   }
 
   public boolean checkAddresseeVisibility() {
-    return waitForPresence(copyFieldAddressee).isDisplayed();
+    return browser.waitForPresence(copyFieldAddressee).isDisplayed();
   }
 
   public void fillInMailFields(Mail mail) {
-    waitForPresence(addresseeField).sendKeys(mail.getAddressee());
+    browser.waitForPresence(addresseeField).sendKeys(mail.getAddressee());
     MyLogger.info("Addressee was filled with text: " + mail.getAddressee());
     if (mail.getSubject() != null) {
       subjectField.sendKeys(mail.getSubject());

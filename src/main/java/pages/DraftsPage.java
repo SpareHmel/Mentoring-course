@@ -44,26 +44,26 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public boolean isDraftsAddresseeDisplayed() {
-    alertHandling(draftsAddressee);
+    browser.alertHandling(draftsAddressee);
     return draftsAddressee.isDisplayed();
   }
 
   public String getDraftsSubjectText() {
-    return waitForPresence(draftsSubject).getText();
+    return browser.waitForPresence(draftsSubject).getText();
   }
 
   public void selectDraftAndSendMail() {
-    draft.click();
+    browser.click(draft);
     sendMail();
     MyLogger.info("Draft was selected then sent");
   }
 
   public String getNoDraftsMessageText() {
-    return waitForPresence(noDraftsMessage).getText();
+    return browser.waitForPresence(noDraftsMessage).getText();
   }
 
   public void deleteDraft() {
-    jsClick(draftCheckbox);
+    browser.jsClick(draftCheckbox);
     deleteDraftButton.click();
     MyLogger.info("Selected draft was deleted");
   }

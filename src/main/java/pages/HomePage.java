@@ -6,6 +6,7 @@ import entities.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import reporting.MyLogger;
 
 public class HomePage extends AbstractPage {
 
@@ -35,12 +36,15 @@ public class HomePage extends AbstractPage {
   }
 
   public void signIn(User user) {
-    waitPageForLoad();
+    browser.waitPageForLoad();
     loginField.clear();
-    loginField.sendKeys(user.getLogin());
-    waitPageForLoad();
-    submitButton.click();
-    passwordField.sendKeys(user.getPassword());
-    submitButton.click();
+//    loginField.sendKeys(user.getLogin());
+    browser.sendKeys(loginField, user.getLogin());
+    browser.waitPageForLoad();
+    browser.click(submitButton);
+//    passwordField.sendKeys(user.getPassword());
+    browser.sendKeys(passwordField, user.getPassword());
+    browser.click(submitButton);
+    MyLogger.info("Logged in");
   }
 }

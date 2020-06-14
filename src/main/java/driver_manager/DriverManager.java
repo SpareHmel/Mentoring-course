@@ -33,6 +33,6 @@ public class DriverManager {
         options.setCapability("platform", Platform.WINDOWS);
         options.setCapability("javascriptEnabled", true);
         driver = new ChromeDriver(options);
-        driver = new CustomDriverDecorator(driver);
+//        driver = new CustomDriverDecorator(driver);
     }
 }

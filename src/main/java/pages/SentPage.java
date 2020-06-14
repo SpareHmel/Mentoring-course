@@ -5,6 +5,7 @@ import static org.testng.AssertJUnit.assertTrue;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import reporting.MyLogger;
 
 public class SentPage extends BaseMailPage {
 
@@ -31,15 +32,17 @@ public class SentPage extends BaseMailPage {
   }
 
   public String getMailDetailsText() {
-    alertHandling(mail);
+    browser.alertHandling(mail);
     return mail.getText();
   }
 
   public void scrollToLastSentMail() {
-    scrollToElement(lastSentMail);
+    browser.scrollToElement(lastSentMail);
+    browser.highlightElement(lastSentMail);
+    MyLogger.info("Scrolled to the last sent mail");
   }
 
   public boolean isSentMailDisplayed() {
-    return waitForPresence(lastSentMail).isDisplayed();
+    return browser.waitForPresence(lastSentMail).isDisplayed();
   }
 }

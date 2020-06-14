@@ -20,7 +20,7 @@
     <log4j.version>1.2.17</log4j.version>
     <allure2-model-pojo.version>1.0.0</allure2-model-pojo.version>
     <allure-java-commons.version>2.13.3</allure-java-commons.version>
-    <aspectj.version>1.9.5</aspectj.version>
+    <aspectj.version>1.8.13</aspectj.version>
   </properties>
 
   <dependencies>
@@ -29,45 +29,38 @@
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>${selenium.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
       <version>${hamcrest.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>${webdrivermanager.version}</version>
     </dependency>
-
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
     </dependency>
-
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure2-model-pojo</artifactId>
       <version>${allure2-model-pojo.version}</version>
     </dependency>
-
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-java-commons</artifactId>
@@ -87,7 +80,6 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -101,6 +93,13 @@
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
+          <systemProperties>
+            <property>
+              <name>allure.results.directory</name>
+              <value>target/allure-results</value>
+              <allure.results.directory>target/allure-results</allure.results.directory>
+            </property>
+          </systemProperties>
         </configuration>
         <dependencies>
           <dependency>
@@ -110,6 +109,21 @@
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.9.0</version>
+      </plugin>
     </plugins>
   </build>
+
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.9</version>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

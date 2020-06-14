@@ -5,12 +5,15 @@ import static org.testng.AssertJUnit.assertTrue;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import reporting.MyLogger;
 
 public class TemplatePage extends BaseMailPage {
 
   private static final String TEMPLATE_PAGE_URL = BASE_URL + "/templates";
 
-  @FindBy(css = ".dataset-letters a")
+//  @FindBy(css = ".dataset-letters a")
+//  @FindBy(xpath = "//div[@class='I4X89ib']//a[@tabindex='-1']")
+  @FindBy(xpath = "//div[@class='I4X89ib']//a[@tabindex='-1']/div[@class='I4X89tp']")
   private WebElement template;
 
   public TemplatePage(WebDriver driver) {
@@ -28,6 +31,7 @@ public class TemplatePage extends BaseMailPage {
   }
 
   public void openTemplate() {
-    template.click();
+    browser.click(template);
+    MyLogger.info("Template opened");
   }
 }
