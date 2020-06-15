@@ -5,8 +5,15 @@ import io.qameta.allure.Attachment;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -124,8 +131,8 @@ public class Browser {
   @Attachment(value = "Screenshot", type = "image/png")
   private static byte[] captureScreenshot(WebDriver driver) {
     byte[] screenshot = null;
-    screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
-    MyLogger.info("Screenshot has been made");
+    screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//    MyLogger.info("Screenshot has been made");
     return screenshot;
   }
 }
