@@ -79,8 +79,6 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void saveLetterAsTemplate() {
-//    templateButton.click();
-//    templateSaveButton.click();
     browser.click(templateButton);
     browser.click(templateSaveButton);
     MyLogger.info("Letter was saved as template");
@@ -102,13 +100,14 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void fillInMailFields(Mail mail) {
-    browser.waitForPresence(addresseeField).sendKeys(mail.getAddressee());
+    browser.waitForPresence(addresseeField);
+    browser.sendKeys(addresseeField, mail.getAddressee());
     MyLogger.info("Addressee was filled with text: " + mail.getAddressee());
     if (mail.getSubject() != null) {
-      subjectField.sendKeys(mail.getSubject());
+      browser.sendKeys(subjectField, mail.getSubject());
       MyLogger.info("Subject was filled with text: " + mail.getSubject());
     }
-    bodyField.sendKeys(mail.getBody());
+    browser.sendKeys(bodyField, mail.getBody());
     MyLogger.info("Body was filled with text: " + mail.getBody());
   }
 }

@@ -39,7 +39,6 @@ public class Browser {
   }
 
   private static Browser init() {
-//    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
     WebDriver driver = DriverManager.getDriver();
     wait = new WebDriverWait(driver, 10);
     js = (JavascriptExecutor) driver;
@@ -48,12 +47,10 @@ public class Browser {
 
   public void highlightElement(WebElement webElement) {
     js.executeScript("arguments[0].style.border='5px solid green'", webElement);
-//    ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='5px solid green'", webElement);
   }
 
   private void unHighlightElement(WebElement webElement) {
     js.executeScript("arguments[0].style.border='0px'", webElement);
-//    ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='0px'", webElement);
   }
 
   public void click(final WebElement webElement) {
@@ -132,7 +129,7 @@ public class Browser {
   private static byte[] captureScreenshot(WebDriver driver) {
     byte[] screenshot = null;
     screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//    MyLogger.info("Screenshot has been made");
+    MyLogger.info("Screenshot has been made");
     return screenshot;
   }
 }

@@ -23,6 +23,18 @@
     <aspectj.version>1.8.13</aspectj.version>
   </properties>
 
+  <profiles>
+    <profile>
+      <id>mail-tests</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <suit.xml>src/test/resources/suites/tests.xml</suit.xml>
+      </properties>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>

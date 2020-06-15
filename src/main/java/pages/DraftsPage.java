@@ -64,7 +64,7 @@ public class DraftsPage extends BaseMailPage {
 
   public void deleteDraft() {
     browser.jsClick(draftCheckbox);
-    deleteDraftButton.click();
+    browser.click(deleteDraftButton);
     MyLogger.info("Selected draft was deleted");
   }
 }

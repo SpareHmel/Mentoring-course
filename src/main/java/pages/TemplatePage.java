@@ -11,8 +11,6 @@ public class TemplatePage extends BaseMailPage {
 
   private static final String TEMPLATE_PAGE_URL = BASE_URL + "/templates";
 
-//  @FindBy(css = ".dataset-letters a")
-//  @FindBy(xpath = "//div[@class='I4X89ib']//a[@tabindex='-1']")
   @FindBy(xpath = "//div[@class='I4X89ib']//a[@tabindex='-1']/div[@class='I4X89tp']")
   private WebElement template;
 

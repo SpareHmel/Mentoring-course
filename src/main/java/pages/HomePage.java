@@ -38,11 +38,9 @@ public class HomePage extends AbstractPage {
   public void signIn(User user) {
     browser.waitPageForLoad();
     loginField.clear();
-//    loginField.sendKeys(user.getLogin());
     browser.sendKeys(loginField, user.getLogin());
     browser.waitPageForLoad();
     browser.click(submitButton);
-//    passwordField.sendKeys(user.getPassword());
     browser.sendKeys(passwordField, user.getPassword());
     browser.click(submitButton);
     MyLogger.info("Logged in");
