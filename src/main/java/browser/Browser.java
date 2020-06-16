@@ -1,15 +1,9 @@
 package browser;
 
 import driver_manager.DriverManager;
-import io.qameta.allure.Attachment;
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +19,6 @@ public class Browser {
   private static WebDriverWait wait;
   private static JavascriptExecutor js;
   private static Browser instance = null;
-  private static final String SCREENSHOTS_NAME = "screenshots/scr";
 
   private Browser(WebDriver driver) {
     this.driver = driver;
@@ -54,17 +47,15 @@ public class Browser {
   }
 
   public void click(final WebElement webElement) {
-    MyLogger.info("Clicking element '" + webElement.getText() + "' (Located: " + webElement.getLocation() + ")");
+    MyLogger.info("Clicking element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
-    takeScreenshot();
     unHighlightElement(webElement);
     webElement.click();
   }
 
   public void sendKeys(WebElement webElement, String keys) {
-    MyLogger.info("Sending keys to element '" + webElement.getText() + "' (Located: " + webElement.getLocation() + ")");
+    MyLogger.info("Sending keys to element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
-    takeScreenshot();
     unHighlightElement(webElement);
     webElement.sendKeys(keys);
   }
@@ -87,7 +78,7 @@ public class Browser {
       Alert alert = driver.switchTo().alert();
       alert.accept();
     } catch (TimeoutException ignore) {
-      MyLogger.error("No alerts were detected");
+      MyLogger.warn("No alerts were detected");
     }
   }
 
@@ -102,34 +93,11 @@ public class Browser {
 
   public void scrollToElement(WebElement webElement) {
     js.executeScript("arguments[0].scrollIntoView();", webElement);
-    MyLogger.info("Scrolled to the element " + webElement.getText() + "located: " + webElement);
-    takeScreenshot();
+    MyLogger.info("Scrolled to the element located: " + webElement.getLocation());
   }
 
   public void jsClick(WebElement webElement) {
     js.executeScript("arguments[0].click();", webElement);
     MyLogger.info("js click to the element" + webElement);
-    takeScreenshot();
-  }
-
-  public void takeScreenshot() {
-    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-    try {
-      String screenshotName = SCREENSHOTS_NAME + System.nanoTime();
-      String scrPath = screenshotName + ".jpg";
-      File copy = new File(scrPath);
-      FileUtils.copyFile(screenshot, copy);
-      captureScreenshot(this.driver);
-    } catch (IOException e) {
-      MyLogger.error("Failed to make screenshot");
-    }
-  }
-
-  @Attachment(value = "Screenshot", type = "image/png")
-  private static byte[] captureScreenshot(WebDriver driver) {
-    byte[] screenshot = null;
-    screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    MyLogger.info("Screenshot has been made");
-    return screenshot;
   }
 }

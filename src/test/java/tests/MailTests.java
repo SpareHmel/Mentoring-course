@@ -6,12 +6,15 @@ import static org.testng.Assert.assertTrue;
 
 import factory.Mail;
 import factory.MailFactory;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.SentPage;
 import pages.TemplatePage;
+import reporting.AllureAttachmentListener;
 
+@Listeners(AllureAttachmentListener.class)
 public class MailTests extends BaseMailTest {
 
   private final String subject = "Elimination details";
