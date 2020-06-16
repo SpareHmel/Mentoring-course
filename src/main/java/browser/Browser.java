@@ -92,12 +92,12 @@ public class Browser {
   }
 
   public void scrollToElement(WebElement webElement) {
+    MyLogger.info("Scrolling to the element located: " + webElement.getLocation());
     js.executeScript("arguments[0].scrollIntoView();", webElement);
-    MyLogger.info("Scrolled to the element located: " + webElement.getLocation());
   }
 
   public void jsClick(WebElement webElement) {
+    MyLogger.info("Performing js click to the element" + webElement);
     js.executeScript("arguments[0].click();", webElement);
-    MyLogger.info("js click to the element" + webElement);
   }
 }

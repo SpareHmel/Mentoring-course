@@ -73,26 +73,26 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void closeMessageWindow() {
+    MyLogger.info("Message window is closing");
     closeButton.click();
     browser.acceptAlertIfPresent();
-    MyLogger.info("Message window is closed");
   }
 
   public void saveLetterAsTemplate() {
+    MyLogger.info("Letter is saving as template");
     browser.click(templateButton);
     browser.click(templateSaveButton);
-    MyLogger.info("Letter was saved as template");
   }
 
   public void sendMail() {
+    MyLogger.info("Mail is sending");
     bodyField.sendKeys(Keys.CONTROL, Keys.RETURN);
-    MyLogger.info("Mail was sent");
   }
 
   public void moveAddresseeToCopy() {
+    MyLogger.info("Addressee is moving to the copy field");
     copyAddresseeButton.click();
     actions.dragAndDrop(addressee, copyField).build().perform();
-    MyLogger.info("Addressee moved to the copy field");
   }
 
   public boolean checkAddresseeVisibility() {
@@ -100,14 +100,14 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void fillInMailFields(Mail mail) {
+    MyLogger.info("Addressee is filling with text: " + mail.getAddressee());
     browser.waitForPresence(addresseeField);
     browser.sendKeys(addresseeField, mail.getAddressee());
-    MyLogger.info("Addressee was filled with text: " + mail.getAddressee());
     if (mail.getSubject() != null) {
+      MyLogger.info("Subject is filling with text: " + mail.getSubject());
       browser.sendKeys(subjectField, mail.getSubject());
-      MyLogger.info("Subject was filled with text: " + mail.getSubject());
     }
+    MyLogger.info("Body is filling with text: " + mail.getBody());
     browser.sendKeys(bodyField, mail.getBody());
-    MyLogger.info("Body was filled with text: " + mail.getBody());
   }
 }

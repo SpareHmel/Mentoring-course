@@ -37,9 +37,9 @@ public class SentPage extends BaseMailPage {
   }
 
   public void scrollToLastSentMail() {
+    MyLogger.info("Scrolling to the last sent mail");
     browser.scrollToElement(lastSentMail);
     browser.highlightElement(lastSentMail);
-    MyLogger.info("Scrolled to the last sent mail");
   }
 
   public boolean isSentMailDisplayed() {

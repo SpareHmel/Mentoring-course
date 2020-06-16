@@ -29,7 +29,7 @@ public class TemplatePage extends BaseMailPage {
   }
 
   public void openTemplate() {
+    MyLogger.info("Opening template");
     browser.click(template);
-    MyLogger.info("Template opened");
   }
 }

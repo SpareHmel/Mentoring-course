@@ -36,6 +36,7 @@ public class HomePage extends AbstractPage {
   }
 
   public void signIn(User user) {
+    MyLogger.info("Logging in");
     browser.waitPageForLoad();
     loginField.clear();
     browser.sendKeys(loginField, user.getLogin());
@@ -43,6 +44,5 @@ public class HomePage extends AbstractPage {
     browser.click(submitButton);
     browser.sendKeys(passwordField, user.getPassword());
     browser.click(submitButton);
-    MyLogger.info("Logged in");
   }
 }

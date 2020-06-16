@@ -53,9 +53,9 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public void selectDraftAndSendMail() {
+    MyLogger.info("Draft selection and deletion");
     browser.click(draft);
     sendMail();
-    MyLogger.info("Draft was selected then sent");
   }
 
   public String getNoDraftsMessageText() {
@@ -63,8 +63,8 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public void deleteDraft() {
+    MyLogger.info("Draft deletion");
     browser.jsClick(draftCheckbox);
     browser.click(deleteDraftButton);
-    MyLogger.info("Selected draft was deleted");
   }
 }
