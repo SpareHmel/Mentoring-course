@@ -73,19 +73,19 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void closeMessageWindow() {
-    MyLogger.info("Message window is closing");
+    MyLogger.info("Closing message window");
     closeButton.click();
     browser.acceptAlertIfPresent();
   }
 
   public void saveLetterAsTemplate() {
-    MyLogger.info("Letter is saving as template");
+    MyLogger.info("Saving letter as template");
     browser.click(templateButton);
     browser.click(templateSaveButton);
   }
 
   public void sendMail() {
-    MyLogger.info("Mail is sending");
+    MyLogger.info("Sending mail");
     bodyField.sendKeys(Keys.CONTROL, Keys.RETURN);
   }
 
@@ -100,14 +100,14 @@ public class BaseMailPage extends AbstractPage {
   }
 
   public void fillInMailFields(Mail mail) {
-    MyLogger.info("Addressee is filling with text: " + mail.getAddressee());
+    MyLogger.info("Filling addressee with text: " + mail.getAddressee());
     browser.waitForPresence(addresseeField);
     browser.sendKeys(addresseeField, mail.getAddressee());
     if (mail.getSubject() != null) {
-      MyLogger.info("Subject is filling with text: " + mail.getSubject());
+      MyLogger.info("Filling subject with text: " + mail.getSubject());
       browser.sendKeys(subjectField, mail.getSubject());
     }
-    MyLogger.info("Body is filling with text: " + mail.getBody());
+    MyLogger.info("Filling body with text: " + mail.getBody());
     browser.sendKeys(bodyField, mail.getBody());
   }
 }

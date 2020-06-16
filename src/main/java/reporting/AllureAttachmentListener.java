@@ -17,14 +17,12 @@ public class AllureAttachmentListener extends TestListenerAdapter {
 
     @Attachment(value = "Attachment: {0}", type = "image/png")
     public byte[] makeScreenshot(String name) {
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         byte[] array = {1};
         try {
-            String screenshotName = "screenshots/scr" + System.nanoTime();
-            MyLogger.info("Saving screenshot: " + screenshotName);
-            File copy = new File(screenshotName + ".png");
-            FileUtils.copyFile(screenshot, copy);
-            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            array = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            final String screenshotPath = "screenshots/scr_" + System.nanoTime() + ".png";
+            MyLogger.info("Saving screenshot: " + screenshotPath);
+            FileUtils.writeByteArrayToFile(new File(screenshotPath), array);
         } catch (IOException e) {
             MyLogger.error("Failed to make screenshot");
         }

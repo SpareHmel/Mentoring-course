@@ -53,7 +53,7 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public void selectDraftAndSendMail() {
-    MyLogger.info("Draft selection and deletion");
+    MyLogger.info("Selecting draft and sending mail");
     browser.click(draft);
     sendMail();
   }
@@ -63,7 +63,7 @@ public class DraftsPage extends BaseMailPage {
   }
 
   public void deleteDraft() {
-    MyLogger.info("Draft deletion");
+    MyLogger.info("Deleting draft");
     browser.jsClick(draftCheckbox);
     browser.click(deleteDraftButton);
   }
