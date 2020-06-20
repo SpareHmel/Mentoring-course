@@ -1,9 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Mentoring course">
 
+  <listeners>
+    <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
+  </listeners>
+
   <test name="Mail test">
     <classes>
-      <class name="tests.MailTests"/>
+      <class name="tests.sg"/>
     </classes>
   </test>
 </suite>

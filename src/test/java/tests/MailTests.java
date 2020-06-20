@@ -1,9 +1,6 @@
 package tests;
 
-import static driver_manager.DriverManager.getDriver;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+import com.epam.reportportal.testng.ReportPortalTestNGListener;
 import factory.Mail;
 import factory.MailFactory;
 import org.testng.annotations.Listeners;
@@ -12,9 +9,12 @@ import pages.BaseMailPage;
 import pages.DraftsPage;
 import pages.SentPage;
 import pages.TemplatePage;
-import reporting.AllureAttachmentListener;
 
-@Listeners(AllureAttachmentListener.class)
+import static driver_manager.DriverManager.getDriver;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+@Listeners({ReportPortalTestNGListener.class})
 public class MailTests extends BaseMailTest {
 
   private final String subject = "Elimination details";
