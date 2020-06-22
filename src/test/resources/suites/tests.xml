@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Mentoring course">
+<suite name="Mentoring course" parallel="classes" thread-count="10">
 
   <listeners>
     <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
   </listeners>
 
-  <test name="Mail test">
+  <test verbose="1" name="Mail test">
     <classes>
-      <class name="tests.sg"/>
+      <class name="tests.MailTests"/>
     </classes>
   </test>
 </suite>

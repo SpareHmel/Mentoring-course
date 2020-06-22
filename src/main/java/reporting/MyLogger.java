@@ -1,8 +1,8 @@
 package reporting;
 
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MyLogger {
 
@@ -18,5 +18,9 @@ public class MyLogger {
 
   public static void warn(String message) {
     logger.warn(message);
+  }
+
+  public static void attach(String filePath, String message) {
+    logger.info("RP_MESSAGE#FILE#{}#{}", filePath, message);
   }
 }

@@ -1,9 +1,14 @@
 package browser;
 
 import driver_manager.DriverManager;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +54,7 @@ public class Browser {
   public void click(final WebElement webElement) {
     MyLogger.info("Clicking element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
+    takeScreenshot();
     unHighlightElement(webElement);
     webElement.click();
   }
@@ -56,6 +62,7 @@ public class Browser {
   public void sendKeys(WebElement webElement, String keys) {
     MyLogger.info("Sending keys to element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
+    takeScreenshot();
     unHighlightElement(webElement);
     webElement.sendKeys(keys);
   }
@@ -99,5 +106,18 @@ public class Browser {
   public void jsClick(WebElement webElement) {
     MyLogger.info("Performing js click to the element" + webElement);
     js.executeScript("arguments[0].click();", webElement);
+  }
+
+  private void takeScreenshot() {
+    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    try {
+      String screenshotName = "screen" + System.nanoTime();
+      String scrPath = screenshotName + ".jpg";
+      File copy = new File(scrPath);
+      FileUtils.copyFile(screenshot, copy);
+      MyLogger.attach(scrPath, "Screenshot");
+    } catch (IOException e) {
+      MyLogger.error("Failed to make screenshot");
+    }
   }
 }
