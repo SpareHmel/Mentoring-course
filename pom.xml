@@ -129,7 +129,7 @@
             </property>
             <property>
               <name>listener</name>
-              <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+              <value>reporting.CustomReportPortalListener</value>
             </property>
           </properties>
         </configuration>

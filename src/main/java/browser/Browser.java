@@ -54,7 +54,6 @@ public class Browser {
   public void click(final WebElement webElement) {
     MyLogger.info("Clicking element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
-    takeScreenshot();
     unHighlightElement(webElement);
     webElement.click();
   }
@@ -62,7 +61,6 @@ public class Browser {
   public void sendKeys(WebElement webElement, String keys) {
     MyLogger.info("Sending keys to element (Located: " + webElement.getLocation() + ")");
     highlightElement(webElement);
-    takeScreenshot();
     unHighlightElement(webElement);
     webElement.sendKeys(keys);
   }
@@ -108,10 +106,10 @@ public class Browser {
     js.executeScript("arguments[0].click();", webElement);
   }
 
-  private void takeScreenshot() {
+  public void takeScreenshot() {
     File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
     try {
-      String screenshotName = "screen" + System.nanoTime();
+      String screenshotName = "screenshots/scr" + System.nanoTime();
       String scrPath = screenshotName + ".jpg";
       File copy = new File(scrPath);
       FileUtils.copyFile(screenshot, copy);

@@ -2,7 +2,7 @@
 <suite name="Mentoring course" parallel="classes" thread-count="10">
 
   <listeners>
-    <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
+    <listener class-name="reporting.CustomReportPortalListener"/>
   </listeners>
 
   <test verbose="1" name="Mail test">
