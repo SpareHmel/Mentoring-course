@@ -1,6 +1,5 @@
 package driver_manager;
 
-import decorator.CustomDriverDecorator;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Platform;
@@ -33,6 +32,5 @@ public class DriverManager {
         options.setCapability("platform", Platform.WINDOWS);
         options.setCapability("javascriptEnabled", true);
         driver = new ChromeDriver(options);
-//        driver = new CustomDriverDecorator(driver);
     }
 }
