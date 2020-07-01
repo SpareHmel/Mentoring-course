@@ -4,8 +4,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import model.User;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,22 +22,19 @@ public class PlaceholderTests {
 
   @Test
   public void statusCodeTest() {
-    Response response = RestAssured.get("/users");
-    assertEquals(response.getStatusCode(), 200);
+    int statusCode = service.getUsersResponse().getStatusCode();
+    assertEquals(statusCode, 200);
   }
 
   @Test
   public void responseHeaderTest() {
-    Response response = RestAssured.get("/users");
-    String contentEncodingHeader = response.header("Content-Type");
-    assertEquals(contentEncodingHeader, "application/json; charset=utf-8");
+    String header = service.getUsersResponse().header("Content-Type");
+    assertEquals(header, "application/json; charset=utf-8");
   }
 
   @Test
   public void responseBodyTest() {
-    Response response = RestAssured.get("/users");
-    ResponseBody<?> responseBody = response.getBody();
-    User[] users = responseBody.as(User[].class);
+    User[] users = service.getUsersResponse().getBody().as(User[].class);
     assertEquals(users.length, 10);
   }
 
